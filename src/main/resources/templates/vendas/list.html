@@ -15,14 +15,14 @@ and open the template in the editor.
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Descrição</th>
+                    <th>Data</th>
+                    <th>Valor</th>
                 </tr>
             </thead>
-            <tr th:each="p : ${pessoas}">
-                <td th:text="${p.id}"> </td>
-                <td th:text="${p.data}"> </td>
-                <td th:text="${p.total}"> </td>
-               
+            <tr th:each="v : ${vendas}">
+                <td th:text="${v.idVenda}"> </td>
+                <td th:text="${v.data}"> </td>
+                <td th:text="${v.total}"> </td>
             </tr>
         </table>
     </body>
