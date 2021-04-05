@@ -50,6 +50,12 @@ public class Venda implements Serializable {
     public List<ItemVenda> getItemVenda() {
         return itemVenda;
     }
+    
+    public String ListaVenda(){
+        String Lista = " ";
+        Lista = itemVenda.toString();
+        return Lista;
+    } 
 
     public void setItemVenda(List<ItemVenda> itemVenda) {
         this.itemVenda = itemVenda;
@@ -69,6 +75,11 @@ public class Venda implements Serializable {
             Total = Total+i.TotalItem();
         }
         return Total;
+    }
+
+    @Override
+    public String toString() {
+        return "" + itemVenda + ' ';
     }
 
 }

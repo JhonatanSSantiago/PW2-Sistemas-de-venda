@@ -69,4 +69,10 @@ public class ItemVenda implements Serializable {
         this.venda = venda;
     }
 
+    @Override
+    public String toString() {
+        return " " + quantidade + " - " + produto + ' ';
+    }
+
+    
 }

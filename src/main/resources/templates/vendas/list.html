@@ -25,9 +25,22 @@ and open the template in the editor.
                 <td th:text="${v.idVenda}"> </td>
                 <td th:text="${v.data}"> </td>
                 <td th:text="${v.QtdTotalItem}"> </td>
-                <td th:text="${v.getItemVenda}"> </td> 
+                <td th:text="${v.toString}"> </td> 
                 <td th:text="${v.TotalVenda}"> </td>
             </tr>
         </table>
+        <style>
+            body {
+                font-family: sans-serif;
+            }
+            .table, th, td {
+
+                border: 1px solid #ddd;
+            }
+            th {
+                background-color: #1C1C1C;
+                color: white;
+            }
+        </style>
     </body>
 </html>

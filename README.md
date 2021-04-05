@@ -30,6 +30,8 @@ INSERT INTO tb_venda VALUES (1, '5/1/2019');
 INSERT INTO tb_venda VALUES (2, '11/10/2020');
 
 INSERT INTO tb_venda VALUES (3, '21/02/2021');
+
+INSERT INTO tb_venda VALUES (4, '31/03/2021');
 ````
 
 e depois na tabela **tb_itemvenda**
@@ -37,10 +39,10 @@ e depois na tabela **tb_itemvenda**
 ````mysql
 INSERT INTO tb_itemvenda VALUES (1, 1,  1, 1);
 
-INSERT INTO tb_itemvenda VALUES (2, 2, 3, 3);
+INSERT INTO tb_itemvenda VALUES (2, 2, 3, 2);
 
-INSERT INTO tb_itemvenda VALUES (3, 1, 3, 2);
-INSERT INTO tb_itemvenda VALUES (4, 1, 2, 2);
+INSERT INTO tb_itemvenda VALUES (3, 1, 3, 3), (4, 1, 2, 3);
+INSERT INTO tb_itemvenda VALUES (5, 1, 4, 4);
 ````
 
 ````mysql
