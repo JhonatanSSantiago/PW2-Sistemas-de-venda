@@ -50,12 +50,6 @@ public class Venda implements Serializable {
     public List<ItemVenda> getItemVenda() {
         return itemVenda;
     }
-    
-    public String ListaVenda(){
-        String Lista = " ";
-        Lista = itemVenda.toString();
-        return Lista;
-    } 
 
     public void setItemVenda(List<ItemVenda> itemVenda) {
         this.itemVenda = itemVenda;
@@ -64,7 +58,7 @@ public class Venda implements Serializable {
     public double QtdTotalItem() {
         double QtdTotal = 0;
         for (ItemVenda i : itemVenda) {
-            QtdTotal = QtdTotal+i.getQuantidade();
+            QtdTotal = QtdTotal + i.getQuantidade();
         }
         return QtdTotal;
     }
@@ -72,7 +66,7 @@ public class Venda implements Serializable {
     public double TotalVenda() {
         double Total = 0;
         for (ItemVenda i : itemVenda) {
-            Total = Total+i.TotalItem();
+            Total = Total + i.TotalItem();
         }
         return Total;
     }

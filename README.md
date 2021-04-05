@@ -8,10 +8,6 @@ Você deve definir os relacionamento das associações entre as classes usando a
 
 Não é necessário criar a interface web completa do projeto, você deve apenas criar o **list.html** de **Venda** e apresentar os seguintes dados (**ID,** **DATA E** **TOTAL)** da(s) venda(s). Crie o Repository e Controller de **Venda** para apresentar os dados solicitados.
 
-![Diagrama de Classe](Diagrama de Classe.jpg)
-
-
-
 Primeiro Insira os dados na tabela **tb_produtos**
 
 ````mysql

@@ -3,7 +3,6 @@ package com.jhssantiago.vendas.model;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,17 +10,16 @@ import javax.persistence.Table;
  *
  * @author jhons
  */
-
 @Entity
 @Table(name = "tb_produtos") //endereco
 public class Produto implements Serializable {
-    
+
     @Id
     @GeneratedValue
     private int idProduto;
-    
+
     private String descricao;
-    
+
     private double valor;
 
     public int getIdProduto() {
@@ -52,5 +50,5 @@ public class Produto implements Serializable {
     public String toString() {
         return " " + descricao + " - Valor Unitário: " + valor + ' ';
     }
-      
+
 }
