@@ -10,9 +10,7 @@ import java.sql.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,17 +21,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_venda") //pessoa
 public class Venda implements Serializable {
-    
+
     @Id
     @GeneratedValue
     private int idVenda;
-    
+
     private Date data;
-    
-    private double total;
 
     @OneToMany(mappedBy = "venda")
-    private List<ItemVenda> itemVenda;   
+    private List<ItemVenda> itemVenda;
 
     public int getIdVenda() {
         return idVenda;
@@ -59,12 +55,20 @@ public class Venda implements Serializable {
         this.itemVenda = itemVenda;
     }
 
-    public double getTotal() {
-        return total;
+    public double QtdTotalItem() {
+        double QtdTotal = 0;
+        for (ItemVenda i : itemVenda) {
+            QtdTotal = QtdTotal+i.getQuantidade();
+        }
+        return QtdTotal;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public double TotalVenda() {
+        double Total = 0;
+        for (ItemVenda i : itemVenda) {
+            Total = Total+i.TotalItem();
+        }
+        return Total;
     }
 
 }

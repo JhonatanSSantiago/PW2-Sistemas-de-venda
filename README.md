@@ -16,40 +16,34 @@ Primeiro Insira os dados na tabela **tb_produtos**
 
 ````mysql
 INSERT INTO tb_produtos VALUES
-(1, 'Smartphone Moto G9', 1099.99), 
-(2, 'Smartwatch Xiaomi Mi Band 5', 218.50),
-(3, 'Redmi AirDots 3 Xiaomi', 169.99),
-(4, 'Iphone 11 128 GB Branco', 5040.99);
+(1, 'Smartphone Moto G9', 1099.00), 
+(2, 'Smartwatch Xiaomi Mi Band 5', 218.00),
+(3, 'Redmi AirDots 3 Xiaomi', 169.00),
+(4, 'Iphone 11 128 GB Branco', 5040.00);
 ````
 
 Depois insira dados na tabela **tb_venda**
 
 ````mysql
-INSERT INTO tb_venda VALUES (1, '5/1/2019', 1099.99); 
+INSERT INTO tb_venda VALUES (1, '5/1/2019'); 
 
-INSERT INTO tb_venda VALUES (2, '11/10/2020', 1488.48);
+INSERT INTO tb_venda VALUES (2, '11/10/2020');
+
+INSERT INTO tb_venda VALUES (3, '21/02/2021');
 ````
 
 e depois na tabela **tb_itemvenda**
 
 ````mysql
-INSERT INTO tb_itemvenda VALUES (1, 1, 1099.99, 1, 1);
+INSERT INTO tb_itemvenda VALUES (1, 1,  1, 1);
 
-INSERT INTO tb_itemvenda VALUES (2, 1, 1099.99, 1, 2);
-INSERT INTO tb_itemvenda VALUES (3, 1, 169.99, 3, 2);
-INSERT INTO tb_itemvenda VALUES (4, 1, 218.50, 2, 2);
+INSERT INTO tb_itemvenda VALUES (2, 2, 3, 3);
+
+INSERT INTO tb_itemvenda VALUES (3, 1, 3, 2);
+INSERT INTO tb_itemvenda VALUES (4, 1, 2, 2);
 ````
-
-
-
-(**obs:** pode inserir dados na tabela **tb_itemvenda** antes da  tabela **tb_venda**, só não inserir dados na coluna **id_venda** )
-
-````mysql
-INSERT INTO tb_itemvenda (id_item, quantidade, id_produto) VALUES (1, 1, 1);
-````
-
-e depois q inserir os dados na tabela **tb_venda**, faça um update na tabela **tb_itemvenda**:
 
 ````mysql
 UPDATE tb_itemvenda SET id_venda = 1 WHERE id_item = 1;
 ````
+

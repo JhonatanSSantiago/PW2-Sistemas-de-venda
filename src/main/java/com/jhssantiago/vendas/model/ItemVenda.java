@@ -25,8 +25,6 @@ public class ItemVenda implements Serializable {
     private int idItem;
     
     private double quantidade;
-    
-    private double totalItem;
 
     @OneToOne
     @JoinColumn(name = "id_produto")
@@ -59,16 +57,10 @@ public class ItemVenda implements Serializable {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-
-    public double getTotalItem() {
-        return totalItem;
+    public double TotalItem() {
+        return this.produto.getValor() * this.quantidade;
     }
-
-    public void setTotalItem(double totalItem) {
-        this.totalItem = totalItem;
-                //this.produto.getValor() * this.quantidade;
-    }
-
+    
     public Venda getVenda() {
         return venda;
     }

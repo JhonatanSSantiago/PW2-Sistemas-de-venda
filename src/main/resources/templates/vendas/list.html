@@ -16,13 +16,17 @@ and open the template in the editor.
                 <tr>
                     <th>Id</th>
                     <th>Data</th>
+                    <th>Quantidade</th>
+                    <th>Descrição</th>
                     <th>Valor</th>
                 </tr>
             </thead>
             <tr th:each="v : ${vendas}">
                 <td th:text="${v.idVenda}"> </td>
                 <td th:text="${v.data}"> </td>
-                <td th:text="${v.total}"> </td>
+                <td th:text="${v.QtdTotalItem}"> </td>
+                <td th:text="${v.getItemVenda}"> </td> 
+                <td th:text="${v.TotalVenda}"> </td>
             </tr>
         </table>
     </body>
