@@ -22,8 +22,13 @@ public class VendaRepository {
     @PersistenceContext
     private EntityManager em;
     
-    public Venda Venda(int id_venda) {
-        return em.find(Venda.class, id_venda);
+    
+    public void save(Venda venda) {
+        em.persist(venda);
+    }
+    
+    public Venda Venda(int idVenda) {
+        return em.find(Venda.class, idVenda);
     }
     
     public List<Venda> vendas(){

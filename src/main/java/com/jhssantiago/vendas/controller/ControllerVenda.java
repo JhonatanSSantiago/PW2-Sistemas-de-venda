@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ControllerVenda {
 
     @Autowired
-    VendaRepository repository;
+    VendaRepository vendarepository;
   
     @Autowired
     Venda venda;
@@ -44,7 +44,7 @@ public class ControllerVenda {
     
     @GetMapping("/list")
     public ModelAndView listar(ModelMap model) {
-        model.addAttribute("vendas", repository.vendas());
+        model.addAttribute("vendas", vendarepository.vendas());
         return new ModelAndView("/vendas/list", model);
     }
     
@@ -59,7 +59,7 @@ public class ControllerVenda {
     public ModelAndView save(Venda venda){
         this.venda.setId(0);
         this.venda.setData(venda.getData());
-        repository.save(this.venda);
+        vendarepository.save(this.venda);
         return new ModelAndView("redirect:/vendas/list");
     }
 }

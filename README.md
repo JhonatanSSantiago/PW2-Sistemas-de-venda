@@ -1,14 +1,23 @@
 #  PW2 Sistemas de Vendas
 
+## Atividade 1
+
 Com JPA você aprendeu que podemos gerar nossas tabelas no banco de dados usando anotações. Deste modo, crie um novo projeto e crie entidades conforme diagrama de classe a seguir.
 
-Você deve definir os relacionamento das associações entre as classes usando as anotações JPA conforme instruções do material em [https://fagno.github.io/pwebii-spring-ifto/jpa/#_mapeamento_com_associa%C3%A7%C3%B5es](https://fagno.github.io/pwebii-spring-ifto/jpa/#_mapeamento_com_associações).
+Você deve:
+
+* Definir os **relacionamento das associações entre as classes** usando as anotações JPA. :white_check_mark:
+
+conforme instruções do material em [https://fagno.github.io/pwebii-spring-ifto/jpa/#_mapeamento_com_associa%C3%A7%C3%B5es](https://fagno.github.io/pwebii-spring-ifto/jpa/#_mapeamento_com_associações).
 
 **Você deve inserir os dados do(s) produto(s) e venda(s) diretamente no banco.**
 
-Não é necessário criar a interface web completa do projeto, você deve apenas criar o **list.html** de **Venda** e apresentar os seguintes dados (**ID,** **DATA E** **TOTAL)** da(s) venda(s). Crie o Repository e Controller de **Venda** para apresentar os dados solicitados.
+Não é necessário criar a interface web completa do projeto, você deve apenas: 
 
-Primeiro Insira os dados na tabela **tb_produtos**
+* Criar **list.html** de **Venda** e apresentar os seguintes dados (**ID,** **DATA E** **TOTAL) ** da(s) venda(s). :white_check_mark:
+* Crie o Repository e Controller de **Venda** para apresentar os dados solicitados. :white_check_mark:
+
+Dados tabela **tb_produtos**
 
 ````mysql
 INSERT INTO tb_produtos VALUES
@@ -18,30 +27,35 @@ INSERT INTO tb_produtos VALUES
 (4, 'Iphone 11 128 GB Branco', 5040.00);
 ````
 
-Depois insira dados na tabela **tb_venda**
+Dados tabela **tb_venda**
 
 ````mysql
 INSERT INTO tb_venda VALUES (1, '5/1/2019'); 
-
 INSERT INTO tb_venda VALUES (2, '11/10/2020');
-
 INSERT INTO tb_venda VALUES (3, '21/02/2021');
-
 INSERT INTO tb_venda VALUES (4, '31/03/2021');
 ````
 
-e depois na tabela **tb_itemvenda**
+Dados tabela **tb_itemvenda**
 
 ````mysql
 INSERT INTO tb_itemvenda VALUES (1, 1,  1, 1);
-
 INSERT INTO tb_itemvenda VALUES (2, 2, 3, 2);
-
 INSERT INTO tb_itemvenda VALUES (3, 1, 3, 3), (4, 1, 2, 3);
 INSERT INTO tb_itemvenda VALUES (5, 1, 4, 4);
 ````
 
-````mysql
-UPDATE tb_itemvenda SET id_venda = 1 WHERE id_item = 1;
-````
+## Atividade 2
+
+Nesta tarefa, você deve complementar o projeto da [Mapeamento com associações usando JPA](https://moodlepalmas.ifto.edu.br/moodle/mod/assign/view.php?id=63417) e criar o carrinho de compras.
+
+**NOTAS:**
+
+* Alterar a associação entre **ItemVenda** e **Venda** para navegabilidade bidirecional; :white_check_mark:
+
+* Criar **FORM de cadastro** e apresentar **lista de produtos**; :white_check_mark:
+
+* Criar **FORM de venda**, na qual, deve permitir selecionar o itens que deseja comprar, informar quantidade e finalizar venda;
+
+* Por fim, criar **view** para apresentar lista de vendas (já feito na tarefa anterior). :white_check_mark:
 
