@@ -7,17 +7,23 @@ package com.jhssantiago.vendas.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author jhons
  */
+@Scope("session")
+@Component
 @Entity
 @Table(name = "tb_venda") //pessoa
 public class Venda implements Serializable {
@@ -28,8 +34,8 @@ public class Venda implements Serializable {
 
     private Date data;
 
-    @OneToMany(mappedBy = "venda")
-    private List<ItemVenda> itemVenda;
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.PERSIST)
+    private List<ItemVenda> itemVenda = new ArrayList();
 
     public int getIdVenda() {
         return idVenda;

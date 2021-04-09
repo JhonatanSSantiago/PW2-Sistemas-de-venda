@@ -28,7 +28,7 @@ public class ItemVenda implements Serializable {
     private Produto produto;
 
     @ManyToOne
-    @JoinColumn(name = "id_venda")
+   // @JoinColumn(name = "id_venda")
     private Venda venda;
 
     public int getIdItem() {
