@@ -17,34 +17,6 @@ Não é necessário criar a interface web completa do projeto, você deve apenas
 * Criar **list.html** de **Venda** e apresentar os seguintes dados (**ID,** **DATA E** **TOTAL) ** da(s) venda(s). :white_check_mark:
 * Crie o Repository e Controller de **Venda** para apresentar os dados solicitados. :white_check_mark:
 
-Dados tabela **tb_produtos**
-
-````mysql
-INSERT INTO tb_produtos VALUES
-(1, 'Smartphone Moto G9', 1099.00), 
-(2, 'Smartwatch Xiaomi Mi Band 5', 218.00),
-(3, 'Redmi AirDots 3 Xiaomi', 169.00),
-(4, 'Iphone 11 128 GB Branco', 5040.00);
-````
-
-Dados tabela **tb_venda**
-
-````mysql
-INSERT INTO tb_venda VALUES (1, '5/1/2019'); 
-INSERT INTO tb_venda VALUES (2, '11/10/2020');
-INSERT INTO tb_venda VALUES (3, '21/02/2021');
-INSERT INTO tb_venda VALUES (4, '31/03/2021');
-````
-
-Dados tabela **tb_itemvenda**
-
-````mysql
-INSERT INTO tb_itemvenda VALUES (1, 1,  1, 1);
-INSERT INTO tb_itemvenda VALUES (2, 2, 3, 2);
-INSERT INTO tb_itemvenda VALUES (3, 1, 3, 3), (4, 1, 2, 3);
-INSERT INTO tb_itemvenda VALUES (5, 1, 4, 4);
-````
-
 ## Atividade 2
 
 Nesta tarefa, você deve complementar o projeto da [Mapeamento com associações usando JPA](https://moodlepalmas.ifto.edu.br/moodle/mod/assign/view.php?id=63417) e criar o carrinho de compras.
@@ -55,7 +27,7 @@ Nesta tarefa, você deve complementar o projeto da [Mapeamento com associações
 
 * Criar **FORM de cadastro** e apresentar **lista de produtos**; :white_check_mark:
 
-* Criar **FORM de venda**, na qual, deve permitir selecionar o itens que deseja comprar, informar quantidade e finalizar venda;
+* Criar **FORM de venda**, na qual, deve permitir selecionar o itens que deseja comprar, informar quantidade e finalizar venda; :white_check_mark:
 
 * Por fim, criar **view** para apresentar lista de vendas (já feito na tarefa anterior). :white_check_mark:
 
