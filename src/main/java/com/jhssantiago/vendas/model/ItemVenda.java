@@ -1,8 +1,10 @@
 package com.jhssantiago.vendas.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,36 +16,34 @@ import javax.persistence.Table;
  * @author jhons
  */
 @Entity
-@Table(name = "tb_itemvenda") //pessoa
+@Table(name = "tb_itemVenda") //pessoa
 public class ItemVenda implements Serializable {
 
+    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue
-    private int idItem;
+    private int idItemVenda;
+    private int quantidade;
 
-    private double quantidade;
-
-    @OneToOne
-    @JoinColumn(name = "id_produto")
+    @OneToOne(cascade = CascadeType.MERGE)
     private Produto produto;
 
-    @ManyToOne
-   // @JoinColumn(name = "id_venda")
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Venda venda;
 
-    public int getIdItem() {
-        return idItem;
+    public int getIdItemVenda() {
+        return idItemVenda;
     }
 
-    public void setId(int idItem) {
-        this.idItem = idItem;
+    public void setId(int idItemVenda) {
+        this.idItemVenda = idItemVenda;
     }
 
-    public double getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(double quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -55,21 +55,21 @@ public class ItemVenda implements Serializable {
         this.produto = produto;
     }
 
-    public double TotalItem() {
-        return this.produto.getValor() * this.quantidade;
-    }
-
     public Venda getVenda() {
         return venda;
     }
 
-    public void setVenda(Venda venda) {
+    public void setVenda(Venda venda) {    
         this.venda = venda;
     }
+    
+    public double TotalItem() {
+        return this.produto.getValor() * this.quantidade;
+    }
 
-    @Override
+ /*   @Override
     public String toString() {
         return " " + quantidade + " - " + produto + ' ';
-    }
+    } */
 
 }

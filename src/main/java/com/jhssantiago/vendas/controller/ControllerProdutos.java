@@ -42,7 +42,7 @@ public class ControllerProdutos {
     
     @GetMapping("/list")
     public ModelAndView listar(ModelMap model) {
-        model.addAttribute("produtos", produtorepository.Produtos());
+        model.addAttribute("produto", produtorepository.produtos());
         return new ModelAndView("/produtos/list", model);
     }
      
@@ -73,7 +73,7 @@ public class ControllerProdutos {
      */
     @GetMapping("/edit/{idProduto}")
     public ModelAndView edit(@PathVariable("idProduto") int idProduto, ModelMap model) {
-        model.addAttribute("produto", produtorepository.Produto(idProduto));
+        model.addAttribute("produto", produtorepository.produto(idProduto));
         return new ModelAndView("/produtos/form", model);
     }
 

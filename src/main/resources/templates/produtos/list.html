@@ -11,30 +11,28 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-         <header>
-            <h1>Catálago de Produtos</h1>
-            
-        </header>
+        <h1>Catálago de Produtos</h1>       
         <table class="table">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Nome</th>
-                    <th>CPF</th>
+                    <th>Produto</th>
+                    <th>Valor</th>
                 </tr>
             </thead>
-            <tr th:each="p : ${produtos}">
+            <tr th:each="p : ${produto}">
                 <td th:text="${p.idProduto}"> </td>
                 <td th:text="${p.descricao}"> </td>
                 <td th:text="${p.valor}"> </td>
                 <td> <a class="botaoEditar" th:href="@{/produtos/edit/{idProduto}(idProduto=${p.idProduto})}" >Editar</a> </td>
-                <td> <a class="botaoExluir" onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produtos/remove/{idProduto}(idProduto=${p.idProduto})}">Excluir</a> </td>
+                <td> <a class="botaoExluir" onclick="return window.confirm('Tem certeza que deseja excluir este Produto?')"  th:href="@{/produtos/remove/{idProduto}(idProduto=${p.idProduto})}">Excluir</a> </td>
             </tr>
         </table>
 
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
             body {
-                font-family: sans-serif;
+                font-family: 'Noto Sans', sans-serif;
             }
 
             .botaoExluir {
@@ -42,14 +40,16 @@ and open the template in the editor.
                 border-radius: 4px;
                 background: red;
                 padding: 2px;
+                font-weight: bold;
             }
 
             .botaoEditar {
                 border: unset;
                 border-radius: 4px;
-                background: graytext;
+                background: silver;
                 padding: 2px;
                 margin:1px;
+                font-weight: bold;
             }
 
             .table, th, td {
@@ -58,9 +58,11 @@ and open the template in the editor.
             }
             a:link 
             { 
-                text-decoration:none; 
+                text-decoration:none;
+                font-weight: bold;
             } 
             th {
+                padding: 4px;
                 background-color: #1C1C1C;
                 color: white;
             }

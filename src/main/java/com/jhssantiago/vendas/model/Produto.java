@@ -46,9 +46,9 @@ public class Produto implements Serializable {
         this.valor = valor;
     }
 
-    @Override
+ /*   @Override
     public String toString() {
         return " " + descricao + " - Valor Unitário: " + valor + ' ';
-    }
+    } */
 
 }

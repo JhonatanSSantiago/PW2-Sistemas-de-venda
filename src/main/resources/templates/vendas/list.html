@@ -12,17 +12,13 @@
                 <tr>
                     <th>Id</th>
                     <th>Data</th>
-                    <th>Quantidade</th>
-                    <th>Descrição</th>
                     <th>Valor</th>
                 </tr>
             </thead>
             <tr th:each="v : ${vendas}">
                 <td th:text="${v.idVenda}"> </td>
-                <td th:text="${v.data}"> </td>
-                <td th:text="${v.QtdTotalItem}"> </td>
-                <td th:text="${v.toString}"> </td> 
-                <td th:text="${v.TotalVenda}"> </td>
+                <td th:text="${v.localDate}"> </td>
+                <td th:text="${v.TotalVenda()}"> </td>
             </tr>
         </table>
         <style>
@@ -30,7 +26,6 @@
                 font-family: sans-serif;
             }
             .table, th, td {
-
                 border: 1px solid #ddd;
             }
             th {
