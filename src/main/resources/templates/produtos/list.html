@@ -10,62 +10,35 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <h1>Catálago de Produtos</h1>       
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Produto</th>
-                    <th>Valor</th>
+    <body class="jumbotron">
+        <div th:insert="fragments/header :: modelheader"></div>
+        <div class="container">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Produto</th>
+                        <th>Valor</th>
+                        <th colspan="2" class="text-center">Opções</th>
+                    </tr>
+                </thead>
+                <tr th:each="p : ${produto}">
+                    <td scope="row" th:text="${p.idProduto}"> </td>
+                    <td th:text="${p.descricao}"> </td>
+                    <td th:text="${p.valor}"> </td>
+                    <td><a role="button" class="btn btn-primary" th:href="@{/produtos/edit/{idProduto}(idProduto=${p.idProduto})}" >Editar</a> </td>
+                    <td><a role="button" class="btn btn-danger" onclick="return window.confirm('Tem certeza que deseja excluir este Produto?')"  th:href="@{/produtos/remove/{idProduto}(idProduto=${p.idProduto})}">Excluir</a> </td>
                 </tr>
-            </thead>
-            <tr th:each="p : ${produto}">
-                <td th:text="${p.idProduto}"> </td>
-                <td th:text="${p.descricao}"> </td>
-                <td th:text="${p.valor}"> </td>
-                <td> <a class="botaoEditar" th:href="@{/produtos/edit/{idProduto}(idProduto=${p.idProduto})}" >Editar</a> </td>
-                <td> <a class="botaoExluir" onclick="return window.confirm('Tem certeza que deseja excluir este Produto?')"  th:href="@{/produtos/remove/{idProduto}(idProduto=${p.idProduto})}">Excluir</a> </td>
-            </tr>
-        </table>
+            </table>
+            <a role="button" class="btn btn-secondary" th:href="@{/produtos/form}">Voltar</a>
+        </div>
+        <div th:insert="fragments/footer :: modelfooter"></div>
 
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
             body {
                 font-family: 'Noto Sans', sans-serif;
-            }
-
-            .botaoExluir {
-                border: unset;
-                border-radius: 4px;
-                background: red;
-                padding: 2px;
-                font-weight: bold;
-            }
-
-            .botaoEditar {
-                border: unset;
-                border-radius: 4px;
-                background: silver;
-                padding: 2px;
-                margin:1px;
-                font-weight: bold;
-            }
-
-            .table, th, td {
-
-                border: 1px solid #ddd;
-            }
-            a:link 
-            { 
-                text-decoration:none;
-                font-weight: bold;
-            } 
-            th {
-                padding: 4px;
-                background-color: #1C1C1C;
-                color: white;
-            }
+            }         
         </style>
     </body>
 </html>

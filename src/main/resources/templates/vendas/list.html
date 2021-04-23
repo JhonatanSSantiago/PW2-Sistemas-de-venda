@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Venda</title>
+        <title>Vendas</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <h1>Lista de Vendas</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Data</th>
-                    <th>Valor</th>
+    <body class="jumbotron">
+        <div th:insert="fragments/header :: modelheader"></div>
+        <div class="container">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Data</th>
+                        <th>Valor</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tr th:each="v : ${vendas}">
+                    <td scope="row" th:text="${v.idVenda}"> </td>
+                    <td th:text="${v.localDate}"> </td>
+                    <td th:text="${v.TotalVenda()}"> </td>
+                    <td><a role="button" class="btn btn-info">VER</a></td>
                 </tr>
-            </thead>
-            <tr th:each="v : ${vendas}">
-                <td th:text="${v.idVenda}"> </td>
-                <td th:text="${v.localDate}"> </td>
-                <td th:text="${v.TotalVenda()}"> </td>
-            </tr>
-        </table>
+            </table>
+            <a role="button" class="btn btn-secondary" th:href="@{/vendas/form}">Voltar</a>
+        </div>
+        <div th:insert="fragments/footer :: modelfooter"></div>
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
             body {
-                font-family: sans-serif;
-            }
-            .table, th, td {
-                border: 1px solid #ddd;
-            }
-            th {
-                background-color: #1C1C1C;
-                color: white;
-            }
+                font-family: 'Noto Sans', sans-serif;
+            }         
         </style>
-    </body>
+    </style>
+</body>
 </html>
