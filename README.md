@@ -35,9 +35,9 @@ Nesta tarefa, você deve complementar o projeto da [Mapeamento com associações
 
 Nesta tarefa, você deve complementar o projeto Carrinho de Compras, conforme a seguir.
 
-* incluir o BootStrap (https://getbootstrap.com/) no seu projeto, dependência a seguir.
+* incluir o BootStrap (https://getbootstrap.com/) no seu projeto, dependência a seguir. :white_check_mark:
 
-* incluir as views header e footer (disponível anexo a tarefa) usando fragments do Spring.
+* incluir as views header e footer (disponível anexo a tarefa) usando fragments do Spring. :white_check_mark:
 
 Ao incluir os arquivos header.html e footer.html (modelo a ser utilizado), faça o insert nas outras páginas HTML. Para incluir o cabeçalho e rodapé basta inserir a linha de código a seguir na sua página. NOTA: O código disponível no header e footer não precisar ser repetido nas suas views.
 
@@ -53,4 +53,22 @@ Para footer:
 <div th:insert="fragments/footer :: modelfooter"></div>
 ````
 
-*  criar view home.html para seu projeto e utilizar a classe ConfiguracaoSpringMvc.java anexo a atividade para carregar a mesma.
+*  criar view home.html para seu projeto e utilizar a classe ConfiguracaoSpringMvc.java anexo a atividade para carregar a mesma. :white_check_mark:
+
+
+## Atividade 4
+
+Nesta tarefa, você deve complementar o projeto CARRINHO DE COMPRAS e incluir a entidade Cliente na associação.
+
+NOTAS: 
+
+1) Utilizar o mapeamento de herança que você utilizou em tarefa anterior ou outra de sua preferência;
+
+* Cliente (id)
+* ClientePF (nome, cpf), subclasse de Cliente.
+
+2) Incluir o cadastro de cliente com CRUD;
+
+3) Um cliente pode ter várias compras e uma compra só pode ter um cliente;
+
+4) Ao efetuar uma venda o sistema deve permitir selecionar o cliente.
