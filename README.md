@@ -62,12 +62,12 @@ Nesta tarefa, você deve complementar o projeto CARRINHO DE COMPRAS e incluir a 
 
 NOTAS: 
 
-1) Utilizar o mapeamento de herança que você utilizou em tarefa anterior ou outra de sua preferência;
+1) Utilizar o mapeamento de herança que você utilizou em tarefa anterior ou outra de sua preferência; :white_check_mark:
 
-* Cliente (id)
-* ClientePF (nome, cpf), subclasse de Cliente.
+* Cliente (id) :white_check_mark:
+* ClientePF (nome, cpf), subclasse de Cliente. :white_check_mark:
 
-2) Incluir o cadastro de cliente com CRUD;
+2) Incluir o cadastro de cliente com CRUD; :white_check_mark:
 
 3) Um cliente pode ter várias compras e uma compra só pode ter um cliente;
 
