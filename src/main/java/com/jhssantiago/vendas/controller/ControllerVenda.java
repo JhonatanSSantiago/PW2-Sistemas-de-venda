@@ -1,9 +1,11 @@
 package com.jhssantiago.vendas.controller;
 
+import com.jhssantiago.vendas.dao.ClientePFRepository;
 import com.jhssantiago.vendas.dao.ProdutoRepository;
 import com.jhssantiago.vendas.dao.VendaRepository;
 import com.jhssantiago.vendas.model.ItemVenda;
 import com.jhssantiago.vendas.model.Venda;
+import com.jhssantiago.vendas.model.ClientePF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -31,9 +33,12 @@ public class ControllerVenda {
 
     @Autowired
     Venda venda;
-
+    
     @Autowired
     ProdutoRepository produtorepository;
+    
+    @Autowired
+    ClientePFRepository clientepfrepository;
 
     @ResponseBody
     @GetMapping("/teste")
@@ -50,6 +55,7 @@ public class ControllerVenda {
     public ModelAndView form(Venda venda) { //mostra lista de produtos
         ModelMap model = new ModelMap();
         model.addAttribute("produto", produtorepository.produtos()); //mostra lista de produtos
+        model.addAttribute("clientePF", clientepfrepository.clientesPF());
         model.addAttribute("itemVenda", new ItemVenda());
         model.addAttribute("venda", new Venda());
         venda.TotalVenda();
@@ -72,12 +78,20 @@ public class ControllerVenda {
         venda.TotalVenda();
         return new ModelAndView("redirect:/vendas/form");
     }
-
+    
+    /*@PostMapping("/addCliente")
+    public ModelAndView addCliente(Venda venda, ClientePF cliente) {
+        cliente.setVenda(venda);
+        venda.setCliente(cliente);       
+        return new ModelAndView("redirect:/vendas/form");
+    } */
+    
     @PostMapping("/save")
     public ModelAndView save(Venda venda) {
         this.venda.setId(0);
         this.venda.setLocalDate(venda.getLocalDate());
         this.venda.TotalVenda();
+        this.venda.setCliente(venda.getCliente());
         vendarepository.save(this.venda);
         this.venda.getItemVenda().clear();
         return new ModelAndView("redirect:/vendas/list");

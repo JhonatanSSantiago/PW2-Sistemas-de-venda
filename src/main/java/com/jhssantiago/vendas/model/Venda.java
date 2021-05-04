@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.context.annotation.Scope;
@@ -30,6 +31,9 @@ public class Venda implements Serializable {
     private int idVenda;
 
     private LocalDate localDate = LocalDate.now();
+    
+    @ManyToOne
+    private ClientePF cliente;
 
     @OneToMany(mappedBy = "venda", cascade = CascadeType.PERSIST)
     private List<ItemVenda> itemVenda = new ArrayList<>();
@@ -57,6 +61,14 @@ public class Venda implements Serializable {
     public void setItemVenda(ItemVenda itemVenda) {
         this.itemVenda.add(itemVenda);
     }
+
+    public ClientePF getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClientePF cliente) {
+        this.cliente = cliente;
+    }   
     
     public double TotalVenda() {
         double Total = 0;

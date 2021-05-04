@@ -69,6 +69,6 @@ NOTAS:
 
 2) Incluir o cadastro de cliente com CRUD; :white_check_mark:
 
-3) Um cliente pode ter várias compras e uma compra só pode ter um cliente;
+3) Um cliente pode ter várias compras e uma compra só pode ter um cliente; :white_check_mark:
 
-4) Ao efetuar uma venda o sistema deve permitir selecionar o cliente.
+4) Ao efetuar uma venda o sistema deve permitir selecionar o cliente. :white_check_mark:

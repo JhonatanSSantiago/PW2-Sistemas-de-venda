@@ -5,11 +5,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
 /**
  *
  * @author jhons
  */
+@Transactional
 @Repository
 public class ClientePFRepository {
     
@@ -19,9 +21,9 @@ public class ClientePFRepository {
     public void save(ClientePF clientePF) {
         em.persist(clientePF);
     }
-
-    public ClientePF clientePF(int id) {
-        return em.find(ClientePF.class, id);
+    
+    public ClientePF clientePF(int idCliente) {
+        return em.find(ClientePF.class, idCliente);
     }
 
     @SuppressWarnings("unchecked")
@@ -30,8 +32,8 @@ public class ClientePFRepository {
         return query.getResultList();
     }
 
-    public void remove(int id) {
-        ClientePF pf = em.find(ClientePF.class, id);
+    public void remove(int idCliente) {
+        ClientePF pf = em.find(ClientePF.class, idCliente);
         em.remove(pf);
     }
 

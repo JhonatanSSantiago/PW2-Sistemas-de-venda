@@ -19,7 +19,7 @@ public abstract class Cliente implements Serializable{
     @GeneratedValue(generator = "inc")
     @GenericGenerator(name = "inc", strategy = "increment")
     private int idCliente;
-    
+      
     public int getIdCliente() {
         return idCliente;
     }
@@ -27,5 +27,5 @@ public abstract class Cliente implements Serializable{
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
-
+ 
 }
