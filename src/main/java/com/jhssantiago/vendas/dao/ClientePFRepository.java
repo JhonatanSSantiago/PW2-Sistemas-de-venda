@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
+
 /**
  *
  * @author jhons
@@ -14,14 +15,14 @@ import org.springframework.stereotype.Repository;
 @Transactional
 @Repository
 public class ClientePFRepository {
-    
+
     @PersistenceContext
     private EntityManager em;
 
     public void save(ClientePF clientePF) {
         em.persist(clientePF);
     }
-    
+
     public ClientePF clientePF(int idCliente) {
         return em.find(ClientePF.class, idCliente);
     }

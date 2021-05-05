@@ -62,6 +62,7 @@
                 <form  th:action="@{/vendas/save}" th:object="${venda}" method="post">
                     <input type="hidden" th:field="*{idVenda}" >
                     <input type="hidden" th:field="*{localDate}" >
+                    <label>Cliente: </label>
                     <select th:field="*{cliente.idCliente}" >
                         <option th:each="c : ${clientePF}" th:text="${c.nome}" th:value="${c.idCliente}"></option>                      
                     </select>

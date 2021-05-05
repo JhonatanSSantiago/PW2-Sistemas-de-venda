@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import java.text.DecimalFormat; 
 
 /**
  *
@@ -25,13 +26,12 @@ import org.springframework.stereotype.Component;
 @Entity
 public class Venda implements Serializable {
 
-   
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int idVenda;
 
     private LocalDate localDate = LocalDate.now();
-    
+
     @ManyToOne
     private ClientePF cliente;
 
@@ -46,7 +46,7 @@ public class Venda implements Serializable {
         this.idVenda = idVenda;
     }
 
-     public LocalDate getLocalDate() {
+    public LocalDate getLocalDate() {
         return localDate;
     }
 
@@ -68,19 +68,21 @@ public class Venda implements Serializable {
 
     public void setCliente(ClientePF cliente) {
         this.cliente = cliente;
-    }   
-    
-    public double TotalVenda() {
-        double Total = 0;
-        for (ItemVenda i : itemVenda) {
-            Total += i.TotalItem();
-        }
-        return Total;
     }
 
- /*   @Override
+    public String TotalVenda() {
+        double Total = 0;
+        DecimalFormat df = new DecimalFormat("#,###.00");
+      //  df.format(1234.36);
+        for (ItemVenda i : itemVenda) {
+            Total += i.TotalItem();
+            //df.format(Total);
+        }
+        return df.format(Total);
+    }
+
+    /*   @Override
     public String toString() {
         return "" + itemVenda + ' ';
     } */
-
 }

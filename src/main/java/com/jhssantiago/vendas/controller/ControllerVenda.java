@@ -33,10 +33,10 @@ public class ControllerVenda {
 
     @Autowired
     Venda venda;
-    
+
     @Autowired
     ProdutoRepository produtorepository;
-    
+
     @Autowired
     ClientePFRepository clientepfrepository;
 
@@ -46,10 +46,9 @@ public class ControllerVenda {
         return "Controller Venda Funcionando";
     }
 
-   
     /**
-     * @param venda necessário devido utilizar no form.html o th:object
-     * que faz referência ao objeto esperado no controller.
+     * @param venda necessário devido utilizar no form.html o th:object que faz
+     * referência ao objeto esperado no controller.
      */
     @GetMapping("/form")
     public ModelAndView form(Venda venda) { //mostra lista de produtos
@@ -61,7 +60,6 @@ public class ControllerVenda {
         venda.TotalVenda();
         return new ModelAndView("/vendas/form", model);
     }
-   
 
     @GetMapping("/list")
     public ModelAndView listar(Venda venda, ModelMap model) { //lista de vendas
@@ -78,14 +76,7 @@ public class ControllerVenda {
         venda.TotalVenda();
         return new ModelAndView("redirect:/vendas/form");
     }
-    
-    /*@PostMapping("/addCliente")
-    public ModelAndView addCliente(Venda venda, ClientePF cliente) {
-        cliente.setVenda(venda);
-        venda.setCliente(cliente);       
-        return new ModelAndView("redirect:/vendas/form");
-    } */
-    
+
     @PostMapping("/save")
     public ModelAndView save(Venda venda) {
         this.venda.setId(0);
@@ -96,7 +87,7 @@ public class ControllerVenda {
         this.venda.getItemVenda().clear();
         return new ModelAndView("redirect:/vendas/list");
     }
-    
+
     /**
      * @PathVariable é utilizado quando o valor da variável é passada
      * diretamente na URL
@@ -106,7 +97,7 @@ public class ControllerVenda {
         model.addAttribute("venda", vendarepository.Venda(id));
         return new ModelAndView("/vendas/form", model);
     }
-    
+
     @PostMapping("/update")
     public ModelAndView update(Venda venda) {
         vendarepository.update(venda);
@@ -114,9 +105,9 @@ public class ControllerVenda {
     }
 
     @GetMapping("/remover/{id}")
-    public ModelAndView remover(@PathVariable("id") int id){
-        for(int i = 0; i < venda.getItemVenda().size(); i++){
-            if(venda.getItemVenda().get(i).getProduto().getIdProduto()==(id)){
+    public ModelAndView remover(@PathVariable("id") int id) {
+        for (int i = 0; i < venda.getItemVenda().size(); i++) {
+            if (venda.getItemVenda().get(i).getProduto().getIdProduto() == (id)) {
                 venda.getItemVenda().remove(i);
             }
         }
