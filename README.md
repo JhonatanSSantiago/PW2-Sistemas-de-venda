@@ -72,3 +72,9 @@ NOTAS:
 3) Um cliente pode ter várias compras e uma compra só pode ter um cliente; :white_check_mark:
 
 4) Ao efetuar uma venda o sistema deve permitir selecionar o cliente. :white_check_mark:
+
+## Atividade 5
+
+Nesta tarefa, você deve complementar o projeto CARRINHO DE COMPRAS e incluir as validações necessárias no Back-end do projeto.
+
+Como requisito da atividade, você deve definir validações para cadastro de produtos, clientes e vendas.
