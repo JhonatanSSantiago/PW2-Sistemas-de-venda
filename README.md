@@ -80,3 +80,20 @@ NOTAS:
 Nesta tarefa, você deve complementar o projeto CARRINHO DE COMPRAS e incluir as validações necessárias no Back-end do projeto.
 
 Como requisito da atividade, você deve definir validações para cadastro de produtos, clientes e vendas. :white_check_mark:
+
+## Atividade 6
+
+O HQL é uma linguagem do Hibernate semelhante ao SQL, que não realiza operações nas tabelas e colunas do banco de dados, ele trabalha com objetos persistentes e suas propriedades, ou seja, classes e propriedades das classes.
+
+O HQL inspirou a criação da JPQL (Java Persistence Query Language) que faz parte da especificação oficial da JPA.
+
+Material complementar: [https://docs.jboss.org/hibernate/orm/3.5/reference/pt-BR/html/queryhql.html#queryhql-where](https://docs.jboss.org/hibernate/orm/3.5/reference/pt-BR/html/queryhql.html#queryhql-where)
+
+Nesta tarefa, você deve complementar o projeto CARRINHO DE COMPRAS incluindo:
+
+* Na lista de vendas "detalhes" da compra, consulta que vai apresentar todos as informações da referida compra.
+* Na lista de compras, a consulta deve apresentar apenas ( ID, DATA, CLIENTE, TOTAL ).
+
+Da mesma forma, na consulta de CLIENTES, a funcionalidade deve ser a mesma.
+* Na consulta de CLIENTES crie um campo texto para filtrar CLIENTE por nome.
+* Na consulta de VENDAS crie a possibilidade de filtrar VENDAS por data.
