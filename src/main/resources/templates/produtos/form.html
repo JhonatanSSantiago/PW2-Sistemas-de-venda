@@ -17,7 +17,10 @@ and open the template in the editor.
                 <form class="col" th:action="${produto.idProduto == 0} ? @{/produtos/save} : @{/produtos/update}" th:object="${produto}" method="post">
                     <input type="hidden" th:field="*{idProduto}">
                     Produto: <input class="form-control" type="text" th:field="*{descricao}" placeholder="Produto">
-                    Valor: <input class="form-control" type="text" th:field="*{valor}" placeholder="Valor">                
+                    Valor: <input class="form-control" type="text" th:field="*{valor}" placeholder="Valor">
+                    <div class="alert alert-danger d-flex" role="alert" th:each="erro : ${#fields.detailedErrors()}">
+                        <span th:text="${erro.message}"></span>
+                    </div>
                     <input type="submit" class="btn btn-primary" value="Cadastrar">
                 </form>
             </div>           

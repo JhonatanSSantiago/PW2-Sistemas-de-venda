@@ -3,6 +3,7 @@ package com.jhssantiago.vendas.model;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 /**
  *
@@ -12,16 +13,9 @@ import javax.persistence.Table;
 @Table(name = "tb_clientepf")
 public class ClientePF extends Cliente implements Serializable {
 
-    private String nome;
+
+    @NotBlank
     private String CPF;
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getCPF() {
         return CPF;

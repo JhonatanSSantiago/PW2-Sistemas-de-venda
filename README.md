@@ -4,6 +4,8 @@
 
 Com JPA você aprendeu que podemos gerar nossas tabelas no banco de dados usando anotações. Deste modo, crie um novo projeto e crie entidades conforme diagrama de classe a seguir.
 
+![Diagrama de Classe](DIAGRAMA_DE_CLASSE.jpg)
+
 Você deve:
 
 * Definir os **relacionamento das associações entre as classes** usando as anotações JPA. :white_check_mark:
@@ -77,4 +79,4 @@ NOTAS:
 
 Nesta tarefa, você deve complementar o projeto CARRINHO DE COMPRAS e incluir as validações necessárias no Back-end do projeto.
 
-Como requisito da atividade, você deve definir validações para cadastro de produtos, clientes e vendas.
+Como requisito da atividade, você deve definir validações para cadastro de produtos, clientes e vendas. :white_check_mark:

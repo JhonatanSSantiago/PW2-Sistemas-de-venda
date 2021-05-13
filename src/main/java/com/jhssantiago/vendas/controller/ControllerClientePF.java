@@ -7,9 +7,11 @@ package com.jhssantiago.vendas.controller;
 import com.jhssantiago.vendas.dao.ClientePFRepository;
 import com.jhssantiago.vendas.model.ClientePF;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,8 +35,8 @@ public class ControllerClientePF {
      * @return
      */
     @GetMapping("/form")
-    public String form(ClientePF clientePF) {
-        return "/clientes/form";
+    public ModelAndView form(ClientePF clientePF) {
+        return new ModelAndView("/clientes/form");
     }
 
     @GetMapping("/list")
@@ -44,7 +46,10 @@ public class ControllerClientePF {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(ClientePF clientePF) {
+    public ModelAndView save(@Valid ClientePF clientePF, BindingResult result) {
+        if(result.hasErrors()){
+            return form(clientePF);
+        }
         repository.save(clientePF);
         return new ModelAndView("redirect:/clientes/list");
     }

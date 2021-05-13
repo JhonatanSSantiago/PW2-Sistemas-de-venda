@@ -10,6 +10,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.GenericGenerator;
+import javax.validation.constraints.NotBlank;
 /**
  *
  * @author jhons
@@ -23,6 +24,9 @@ public abstract class Cliente implements Serializable{
     @GenericGenerator(name = "inc", strategy = "increment")
     private int idCliente;
     
+    @NotBlank
+    private String nome;
+    
     @OneToMany(mappedBy = "cliente")
     private List<Venda> venda = new ArrayList<>();
       
@@ -32,6 +36,14 @@ public abstract class Cliente implements Serializable{
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
     
      public List<Venda> getVenda() {

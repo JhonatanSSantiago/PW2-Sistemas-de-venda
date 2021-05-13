@@ -3,13 +3,12 @@ package com.jhssantiago.vendas.controller;
 import com.jhssantiago.vendas.dao.ClientePFRepository;
 import com.jhssantiago.vendas.dao.ProdutoRepository;
 import com.jhssantiago.vendas.dao.VendaRepository;
+import com.jhssantiago.vendas.model.ClientePF;
 import com.jhssantiago.vendas.model.ItemVenda;
 import com.jhssantiago.vendas.model.Venda;
-import com.jhssantiago.vendas.model.ClientePF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-//import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * @author jhons
@@ -47,16 +49,16 @@ public class ControllerVenda {
     }
 
     /**
-     * @param venda necessário devido utilizar no form.html o th:object que faz
+     * @param itemVenda necessário devido utilizar no form.html o th:object que faz
      * referência ao objeto esperado no controller.
      */
     @GetMapping("/form")
-    public ModelAndView form(Venda venda) { //mostra lista de produtos
+    public ModelAndView form(ItemVenda itemVenda) { //mostra lista de produtos
         ModelMap model = new ModelMap();
         model.addAttribute("produto", produtorepository.produtos()); //mostra lista de produtos
         model.addAttribute("clientePF", clientepfrepository.clientesPF());
         model.addAttribute("itemVenda", new ItemVenda());
-        model.addAttribute("venda", new Venda());
+      //  model.addAttribute("venda", new Venda());
         venda.TotalVenda();
         return new ModelAndView("/vendas/form", model);
     }
@@ -68,7 +70,11 @@ public class ControllerVenda {
     }
 
     @PostMapping("/add")
-    public ModelAndView add(ItemVenda itemVenda) {
+    public ModelAndView add(ItemVenda itemVenda, RedirectAttributes attributes) {
+        if(itemVenda.getQuantidade() == 0){
+            attributes.addFlashAttribute("erroQtd", "Quantidade deve ser maior que ou igual à 1");
+            return new ModelAndView("redirect:/vendas/form");
+        }
         itemVenda.setVenda(venda);
         itemVenda.setProduto(produtorepository.produto(itemVenda.getProduto().getIdProduto()));
         itemVenda.TotalItem();
@@ -78,11 +84,20 @@ public class ControllerVenda {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(Venda venda) {
+    public ModelAndView save(RedirectAttributes attributes, ClientePF clientePF) {
+        if(venda.getItemVenda().isEmpty()){
+            attributes.addFlashAttribute("erroItem", "Carrinho está vazio");
+        }
+        if(clientePF.getIdCliente()== 0) {
+            attributes.addFlashAttribute("erroCliente", "Selecione um cliente");
+        }
+        if(!attributes.getFlashAttributes().isEmpty()){
+            return new ModelAndView("redirect:/vendas/form");
+        }
         this.venda.setId(0);
         this.venda.setLocalDate(venda.getLocalDate());
         this.venda.TotalVenda();
-        this.venda.setCliente(venda.getCliente());
+        this.venda.setCliente(clientepfrepository.clientePF(clientePF.getIdCliente()));
         vendarepository.save(this.venda);
         this.venda.getItemVenda().clear();
         return new ModelAndView("redirect:/vendas/list");

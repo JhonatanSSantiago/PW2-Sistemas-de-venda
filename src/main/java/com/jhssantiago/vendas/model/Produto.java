@@ -5,21 +5,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 /**
  *
  * @author jhons
  */
 @Entity
-@Table(name = "tb_produtos") //endereco
+@Table(name = "tb_produtos")
 public class Produto implements Serializable {
 
     @Id
     @GeneratedValue
     private int idProduto;
-
+    
+    @NotBlank
     private String descricao;
 
+    @Min(1)
     private double valor;
 
     public int getIdProduto() {

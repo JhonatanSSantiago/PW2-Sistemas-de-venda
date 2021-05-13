@@ -10,7 +10,7 @@
         <div class="container">         
             <table class="table table-striped">
                 <thead class="table-dark">
-                    <tr >
+                    <tr>
                         <th>Id</th>
                         <th>Produto</th>             
                         <th>Valor</th>
@@ -21,20 +21,22 @@
                     <tr th:each="p : ${produto}">
                         <td scope="row" th:text="${p.idProduto}"> </td>
                         <td th:text="${p.descricao}"> </td>
-                        <td th:text="${p.valor}"> </td>
+                        <td th:text="${#numbers.formatDecimal(p.valor, 1, 2)}"> </td>
                         <td> 
                             <input type="hidden" th:value="${p.descricao}">
                             <input type="hidden" th:value="${p.valor}">
                             <form th:action="@{/vendas/add}" th:object="${itemVenda}" method="post">
                                 <input th:value="${p.idProduto}" th:name="produto.idProduto" type="hidden">
                                 <input type="number" required th:field="*{quantidade}" style="width:50px">
-                                <input role="button" type="submit" value="Add">
-                            </form> 
+                                <input role="button" type="submit" value="Add">                               
+                            </form>
                         </td>
                     </tr>
                 </tbody>
             </table>
-
+            <div th:class="${!#strings.isEmpty(erroQtd)}?${'alert alert-danger d-flex'}">
+                <span th:text="${!#strings.isEmpty(erroQtd)}?${erroQtd}"></span>           
+            </div>
             <br>
 
             <h3>Carrinho de Compras</h3>
@@ -51,23 +53,30 @@
                     <tr class="table-light" th:each="i : ${session.venda.itemVenda}">                
                         <td th:text="${i.produto.descricao}"> </td>
                         <td th:text="${i.quantidade}"> </td>
-                        <td th:text="${i.TotalItem()}"> </td>
+                        <td th:text="${#numbers.formatDecimal(i.TotalItem(), 1, 2)}"> </td>
                         <td><a role="button" class="btn btn-danger" th:href="@{/vendas/remover/{id}(id=${i.produto.idProduto})}">Excluir</a> </td>
                     </tr>
                 </tbody>
             </table>
-
+            <br>
+            <div th:class="${!#strings.isEmpty(erroItem)}?${'alert alert-danger d-flex'}">
+                <span th:text="${!#strings.isEmpty(erroItem)}?${erroItem}"></span>           
+            </div> 
+            <br>
             <div style="right: 100px;">
                 <label>Total Compra: R$ </label><span th:text="${session.venda.TotalVenda()}"></span><br>               
-                <form  th:action="@{/vendas/save}" th:object="${venda}" method="post">
-                    <input type="hidden" th:field="*{idVenda}" >
-                    <input type="hidden" th:field="*{localDate}" >
+                <form th:action="@{/vendas/save}" th:object="${clientePF}" method="post">
                     <label>Cliente: </label>
-                    <select th:field="*{cliente.idCliente}" >
+                    <select th:name="idCliente" >
+                        <option th:value = 0 > - </option>
                         <option th:each="c : ${clientePF}" th:text="${c.nome}" th:value="${c.idCliente}"></option>                      
                     </select>
                     <input role="button" class="btn btn-info" type="submit" value="Finalizar Compra">
                 </form>
+                <br>
+                <div th:class="${!#strings.isEmpty(erroCliente)}?${'alert alert-danger d-flex'}">               
+                    <span th:text="${!#strings.isEmpty(erroCliente)}?${erroCliente}"></span>            
+                </div>
             </div>
             <br>           
         </div>
