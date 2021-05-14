@@ -95,5 +95,5 @@ Nesta tarefa, você deve complementar o projeto CARRINHO DE COMPRAS incluindo:
 * Na lista de compras, a consulta deve apresentar apenas ( ID, DATA, CLIENTE, TOTAL ).
 
 Da mesma forma, na consulta de CLIENTES, a funcionalidade deve ser a mesma.
-* Na consulta de CLIENTES crie um campo texto para filtrar CLIENTE por nome.
+* Na consulta de CLIENTES crie um campo texto para filtrar CLIENTE por nome. 
 * Na consulta de VENDAS crie a possibilidade de filtrar VENDAS por data.
