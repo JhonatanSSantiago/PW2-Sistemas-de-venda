@@ -1,4 +1,4 @@
-package com.jhssantiago.vendas.dao;
+package com.jhssantiago.vendas.repository;
 
 import com.jhssantiago.vendas.model.ClientePF;
 import java.util.List;
@@ -40,5 +40,13 @@ public class ClientePFRepository {
 
     public void update(ClientePF clientePF) {
         em.merge(clientePF);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<ClientePF> clientes(String nome) {
+        String hql = "from ClientePF as c where c.nome = :nome";
+        Query query = em.createQuery(hql, ClientePF.class);
+        query.setParameter("nome", nome);
+        return query.getResultList();  
     }
 }

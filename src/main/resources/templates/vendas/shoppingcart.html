@@ -58,11 +58,13 @@
                     </tr>
                 </tbody>
             </table>
-            <br>
             <div th:class="${!#strings.isEmpty(erroItem)}?${'alert alert-danger d-flex'}">
                 <span th:text="${!#strings.isEmpty(erroItem)}?${erroItem}"></span>           
             </div> 
             <br>
+            <div th:class="${!#strings.isEmpty(erroCliente)}?${'alert alert-danger d-flex'}">               
+                <span th:text="${!#strings.isEmpty(erroCliente)}?${erroCliente}"></span>            
+            </div>
             <div style="right: 100px;">
                 <label>Total Compra: R$ </label><span th:text="${session.venda.TotalVenda()}"></span><br>               
                 <form th:action="@{/vendas/save}" th:object="${clientePF}" method="post">
@@ -72,11 +74,7 @@
                         <option th:each="c : ${clientePF}" th:text="${c.nome}" th:value="${c.idCliente}"></option>                      
                     </select>
                     <input role="button" class="btn btn-info" type="submit" value="Finalizar Compra">
-                </form>
-                <br>
-                <div th:class="${!#strings.isEmpty(erroCliente)}?${'alert alert-danger d-flex'}">               
-                    <span th:text="${!#strings.isEmpty(erroCliente)}?${erroCliente}"></span>            
-                </div>
+                </form>              
             </div>
             <br>           
         </div>

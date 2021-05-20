@@ -1,6 +1,6 @@
-package com.jhssantiago.vendas.dao;
-
+package com.jhssantiago.vendas.repository;
 import com.jhssantiago.vendas.model.Venda;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,5 +41,21 @@ public class VendaRepository {
     public void update(Venda venda) {
         em.merge(venda);
     }
-
+    
+    @SuppressWarnings("unchecked")
+    public List<Venda> venda(int idVenda){
+        String sql = "from Venda as v where v.idVenda = :idVenda";
+        Query query = em.createQuery(sql, Venda.class);
+        query.setParameter("idVenda", idVenda);
+        return query.getResultList();
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<Venda> vendas(LocalDate localDate) {
+        String hql = "from Venda as v where v.localDate = :localDate";
+        Query query = em.createQuery(hql, Venda.class);
+        query.setParameter("localDate", localDate);
+        return query.getResultList();
+    }
+    
 }

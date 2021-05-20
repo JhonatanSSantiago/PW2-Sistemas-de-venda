@@ -91,9 +91,10 @@ Material complementar: [https://docs.jboss.org/hibernate/orm/3.5/reference/pt-BR
 
 Nesta tarefa, você deve complementar o projeto CARRINHO DE COMPRAS incluindo:
 
-* Na lista de vendas "detalhes" da compra, consulta que vai apresentar todos as informações da referida compra.
-* Na lista de compras, a consulta deve apresentar apenas ( ID, DATA, CLIENTE, TOTAL ).
+* Na lista de vendas "detalhes" da compra, consulta que vai apresentar todos as informações da referida compra. :white_check_mark:
+* Na lista de vendas, a consulta deve apresentar apenas ( ID, DATA, CLIENTE, TOTAL ). :white_check_mark:
 
 Da mesma forma, na consulta de CLIENTES, a funcionalidade deve ser a mesma.
-* Na consulta de CLIENTES crie um campo texto para filtrar CLIENTE por nome. 
-* Na consulta de VENDAS crie a possibilidade de filtrar VENDAS por data.
+
+* Na consulta de CLIENTES crie um campo texto para filtrar CLIENTE por nome. :white_check_mark:
+* Na consulta de VENDAS crie a possibilidade de filtrar VENDAS por data. :white_check_mark:

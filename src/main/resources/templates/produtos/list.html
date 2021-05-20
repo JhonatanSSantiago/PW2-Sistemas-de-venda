@@ -30,7 +30,7 @@ and open the template in the editor.
                     <td><a role="button" class="btn btn-danger" onclick="return window.confirm('Tem certeza que deseja excluir este Produto?')"  th:href="@{/produtos/remove/{idProduto}(idProduto=${p.idProduto})}">Excluir</a> </td>
                 </tr>
             </table>
-            <a role="button" class="btn btn-secondary" th:href="@{/produtos/form}">Voltar</a>
+            <a role="button" class="btn btn-secondary" th:href="@{/produtos/registration}">Voltar</a>
         </div>
         <div th:insert="fragments/footer :: modelfooter"></div>
 

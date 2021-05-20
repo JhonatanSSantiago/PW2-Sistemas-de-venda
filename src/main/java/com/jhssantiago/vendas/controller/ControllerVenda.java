@@ -1,11 +1,14 @@
 package com.jhssantiago.vendas.controller;
 
-import com.jhssantiago.vendas.dao.ClientePFRepository;
-import com.jhssantiago.vendas.dao.ProdutoRepository;
-import com.jhssantiago.vendas.dao.VendaRepository;
+import com.jhssantiago.vendas.repository.ClientePFRepository;
+import com.jhssantiago.vendas.repository.ItemVendaRepository;
+import com.jhssantiago.vendas.repository.ProdutoRepository;
+import com.jhssantiago.vendas.repository.VendaRepository;
 import com.jhssantiago.vendas.model.ClientePF;
 import com.jhssantiago.vendas.model.ItemVenda;
 import com.jhssantiago.vendas.model.Venda;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -17,8 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.transaction.Transactional;
-import javax.validation.Valid;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -42,6 +44,9 @@ public class ControllerVenda {
     @Autowired
     ClientePFRepository clientepfrepository;
 
+    @Autowired
+    ItemVendaRepository ivrepository;
+     
     @ResponseBody
     @GetMapping("/teste")
     public String teste() {
@@ -49,50 +54,63 @@ public class ControllerVenda {
     }
 
     /**
-     * @param itemVenda necessário devido utilizar no form.html o th:object que faz
-     * referência ao objeto esperado no controller.
+     * @param itemVenda necessário devido utilizar no form.html o th:object que
+     * faz referência ao objeto esperado no controller.
      */
-    @GetMapping("/form")
-    public ModelAndView form(ItemVenda itemVenda) { //mostra lista de produtos
+    @GetMapping("/shoppingcart")
+    public ModelAndView shoppingcart(ItemVenda itemVenda) { //mostra lista de produtos
         ModelMap model = new ModelMap();
         model.addAttribute("produto", produtorepository.produtos()); //mostra lista de produtos
         model.addAttribute("clientePF", clientepfrepository.clientesPF());
         model.addAttribute("itemVenda", new ItemVenda());
-      //  model.addAttribute("venda", new Venda());
         venda.TotalVenda();
-        return new ModelAndView("/vendas/form", model);
+        return new ModelAndView("/vendas/shoppingcart", model);
     }
 
-    @GetMapping("/list")
-    public ModelAndView listar(Venda venda, ModelMap model) { //lista de vendas
+    @GetMapping("/saleslist")
+    public ModelAndView saleslist(Venda venda, ModelMap model) { //lista de vendas
         model.addAttribute("vendas", vendarepository.vendas());
-        return new ModelAndView("/vendas/list", model);
+        return new ModelAndView("/vendas/saleslist", model);
     }
+
+    @GetMapping("/details/{idVenda}")
+    public ModelAndView details(@PathVariable(value = "idVenda") int idVenda, ModelMap model) { //lista de venda
+        
+        model.addAttribute("vendas", vendarepository.venda(idVenda));
+        model.addAttribute("itemVenda", ivrepository.itemVendas(idVenda));
+        return new ModelAndView("/vendas/saledetails", model);
+    }
+    
+   /* @GetMapping("/saledetails")
+    public ModelAndView saledetails(Venda venda, ModelMap model) { //lista de venda
+        model.addAttribute("vendas", vendarepository.vendas());
+        return new ModelAndView("/vendas/salelist", model);
+    } */
 
     @PostMapping("/add")
     public ModelAndView add(ItemVenda itemVenda, RedirectAttributes attributes) {
-        if(itemVenda.getQuantidade() == 0){
+        if (itemVenda.getQuantidade() == 0) {
             attributes.addFlashAttribute("erroQtd", "Quantidade deve ser maior que ou igual à 1");
-            return new ModelAndView("redirect:/vendas/form");
+            return new ModelAndView("redirect:/vendas/shoppingcart");
         }
         itemVenda.setVenda(venda);
         itemVenda.setProduto(produtorepository.produto(itemVenda.getProduto().getIdProduto()));
         itemVenda.TotalItem();
         venda.setItemVenda(itemVenda);
         venda.TotalVenda();
-        return new ModelAndView("redirect:/vendas/form");
+        return new ModelAndView("redirect:/vendas/shoppingcart");
     }
 
     @PostMapping("/save")
     public ModelAndView save(RedirectAttributes attributes, ClientePF clientePF) {
-        if(venda.getItemVenda().isEmpty()){
+        if (venda.getItemVenda().isEmpty()) {
             attributes.addFlashAttribute("erroItem", "Carrinho está vazio");
         }
-        if(clientePF.getIdCliente()== 0) {
+        if (clientePF.getIdCliente() == 0) {
             attributes.addFlashAttribute("erroCliente", "Selecione um cliente");
         }
-        if(!attributes.getFlashAttributes().isEmpty()){
-            return new ModelAndView("redirect:/vendas/form");
+        if (!attributes.getFlashAttributes().isEmpty()) {
+            return new ModelAndView("redirect:/vendas/shoppingcart");
         }
         this.venda.setId(0);
         this.venda.setLocalDate(venda.getLocalDate());
@@ -100,24 +118,14 @@ public class ControllerVenda {
         this.venda.setCliente(clientepfrepository.clientePF(clientePF.getIdCliente()));
         vendarepository.save(this.venda);
         this.venda.getItemVenda().clear();
-        return new ModelAndView("redirect:/vendas/list");
+        return new ModelAndView("redirect:/vendas/saleslist");
     }
 
     /**
      * @PathVariable é utilizado quando o valor da variável é passada
      * diretamente na URL
      */
-    @GetMapping("/edit/{id}")
-    public ModelAndView edit(@PathVariable("id") int id, ModelMap model) {
-        model.addAttribute("venda", vendarepository.Venda(id));
-        return new ModelAndView("/vendas/form", model);
-    }
-
-    @PostMapping("/update")
-    public ModelAndView update(Venda venda) {
-        vendarepository.update(venda);
-        return new ModelAndView("redirect:/vendas/list");
-    }
+   
 
     @GetMapping("/remover/{id}")
     public ModelAndView remover(@PathVariable("id") int id) {
@@ -126,6 +134,15 @@ public class ControllerVenda {
                 venda.getItemVenda().remove(i);
             }
         }
-        return new ModelAndView("redirect:/vendas/form");
+        return new ModelAndView("redirect:/vendas/shoppingcart");
     }
+
+    @GetMapping("/buscarfordata")
+    public ModelAndView buscarfordata(@RequestParam(value = "databusca") String databusca, ModelMap model) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate data = LocalDate.parse(databusca, formatter);
+        model.addAttribute("vendas", vendarepository.vendas(data));
+        return new ModelAndView("/vendas/saleslist");
+    }
+
 }

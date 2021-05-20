@@ -1,6 +1,6 @@
 package com.jhssantiago.vendas.controller;
 
-import com.jhssantiago.vendas.dao.ProdutoRepository;
+import com.jhssantiago.vendas.repository.ProdutoRepository;
 import com.jhssantiago.vendas.model.Produto;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -37,9 +37,9 @@ public class ControllerProdutos {
     * referência ao objeto esperado no controller.
     * @return
     */
-    @GetMapping("/form")
-    public ModelAndView form(Produto produto) {
-       return new ModelAndView("/produtos/form");
+    @GetMapping("/registration")
+    public ModelAndView productRegistration(Produto produto) {
+       return new ModelAndView("/produtos/registration");
     }
     
     @GetMapping("/list")
@@ -51,7 +51,7 @@ public class ControllerProdutos {
      @PostMapping("/save")
     public ModelAndView save(@Valid Produto produto, BindingResult result) {
         if(result.hasErrors()){
-            return form(produto);
+            return productRegistration(produto);
         }
         produtorepository.save(produto);
         return new ModelAndView("redirect:/produtos/list");
@@ -79,7 +79,7 @@ public class ControllerProdutos {
     @GetMapping("/edit/{idProduto}")
     public ModelAndView edit(@PathVariable("idProduto") int idProduto, ModelMap model) {
         model.addAttribute("produto", produtorepository.produto(idProduto));
-        return new ModelAndView("/produtos/form", model);
+        return new ModelAndView("/produtos/registration", model);
     }
 
     @PostMapping("/update")

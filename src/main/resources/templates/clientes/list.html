@@ -13,13 +13,17 @@ and open the template in the editor.
     <body class="jumbotron">
         <div th:insert="fragments/header :: modelheader"></div>
         <div class="container">
+            <form th:action="@{/clientes/buscarforname}" method="get">
+                <input type="text" th:value="@{nome}" th:name="nome">
+                <input type="submit" value="buscar">
+            </form>
+            <br>
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
                         <th>CPF</th>
-             <!--           <th>Venda</th> -->
                         <th colspan="2" class="text-center">Opções</th>
                     </tr>
                 </thead>
@@ -27,7 +31,6 @@ and open the template in the editor.
                     <td scope="row" th:text="${c.idCliente}"> </td>
                     <td th:text="${c.nome}"> </td>
                     <td th:text="${c.CPF}"> </td>
-           <!--         <td th:text="${c.getVenda}"> </td> -->
                     <td><a role="button" class="btn btn-primary" th:href="@{/clientes/edit/{idCliente}(idCliente=${c.idCliente})}" >Editar</a> </td>
                     <td><a role="button" class="btn btn-danger" onclick="return window.confirm('Tem certeza que deseja excluir este Produto?')"  th:href="@{/clientes/remove/{idCliente}(idCliente=${c.idCliente})}">Excluir</a> </td>
                 </tr>

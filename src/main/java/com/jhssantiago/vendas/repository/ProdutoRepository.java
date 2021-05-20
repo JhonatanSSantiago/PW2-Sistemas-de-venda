@@ -1,4 +1,4 @@
-package com.jhssantiago.vendas.dao;
+package com.jhssantiago.vendas.repository;
 
 import com.jhssantiago.vendas.model.Produto;
 import java.util.List;

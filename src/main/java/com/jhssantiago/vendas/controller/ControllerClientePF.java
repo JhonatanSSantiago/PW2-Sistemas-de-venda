@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.jhssantiago.vendas.controller;
-import com.jhssantiago.vendas.dao.ClientePFRepository;
+import com.jhssantiago.vendas.repository.ClientePFRepository;
 import com.jhssantiago.vendas.model.ClientePF;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 /**
  *
@@ -84,5 +85,11 @@ public class ControllerClientePF {
     public ModelAndView update(ClientePF clientePF) {
         repository.update(clientePF);
         return new ModelAndView("redirect:/clientes/list");
+    }
+    
+    @GetMapping("/buscarforname")
+    public ModelAndView buscarforname(@RequestParam(value = "nome") String nome, ModelMap model) {
+        model.addAttribute("clientePF", repository.clientes(nome));
+        return new ModelAndView("/clientes/list");
     }
 }

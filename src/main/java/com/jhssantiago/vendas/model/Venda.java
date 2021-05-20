@@ -70,13 +70,19 @@ public class Venda implements Serializable {
 
     public String TotalVenda() {
         double Total = 0;
-        DecimalFormat df = new DecimalFormat("#,###.00");
-      //  df.format(1234.36);
+        DecimalFormat df = new DecimalFormat("#,###.00");      
         for (ItemVenda i : itemVenda) {
             Total += i.TotalItem();
-            //df.format(Total);
         }
         return df.format(Total);
+    }
+    
+    public int QtdTotalItem() {
+        int QtdTotal = 0;
+        for (ItemVenda i : itemVenda) {
+            QtdTotal = QtdTotal+i.getQuantidade();
+        }
+        return QtdTotal;
     }
 
     /*   @Override

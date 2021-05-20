@@ -1,4 +1,4 @@
-package com.jhssantiago.vendas.dao;
+package com.jhssantiago.vendas.repository;
 
 import com.jhssantiago.vendas.model.ItemVenda;
 import java.util.List;
@@ -30,6 +30,14 @@ public class ItemVendaRepository {
     @SuppressWarnings("unchecked")
     public List<ItemVenda> itemVendas() {
         Query query = em.createQuery("from ItemVenda");
+        return query.getResultList();
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<ItemVenda> itemVendas(int idVenda) {
+        String sql = "from ItemVenda as i where i.venda.idVenda = :idVenda";
+        Query query = em.createQuery(sql,ItemVenda.class);
+        query.setParameter("idVenda", idVenda);
         return query.getResultList();
     }
 
