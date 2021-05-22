@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Catálogo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div th:insert="fragments/header :: modelheader"></div>
+        <div  class="container">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Produto</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Quantidade</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${produto}">
+                    <td scope="row" th:text="${p.idProduto}"> </td>
+                    <td th:text="${p.nome}"> </td>
+                    <td th:text="${p.descricao}"> </td>
+                    <td th:text="${#numbers.formatDecimal(p.valor, 1, 2)}"> </td>
+                    <td> 
+                        <input type="hidden" th:value="${p.descricao}">
+                        <input type="hidden" th:value="${p.valor}">
+                        <form th:action="@{/vendas/add}" th:object="${itemVenda}" method="post">
+                            <input th:value="${p.idProduto}" th:name="produto.idProduto" type="hidden">
+                            <input type="number" required th:field="*{quantidade}" style="width:50px">
+                            <input role="button" type="submit" value="Add">                               
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div th:class="${!#strings.isEmpty(erroQtd)}?${'alert alert-danger d-flex'}">
+            <span th:text="${!#strings.isEmpty(erroQtd)}?${erroQtd}"></span>           
+        </div>
+    </body>
+</html>

@@ -10,16 +10,17 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body class="jumbotron">
+    <body>
         <div th:insert="fragments/header :: modelheader"></div>
         <div class="container">
 
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th>Id Venda</th>
+                        <th>Código Venda</th>
                         <th>Data</th>
-                        <th>Quantidade de itens</th>
+                        <th>Hora</th>
+                        <th>Total de itens</th>
                         <th>Total</th>
                         <th>Cliente</th>
                     </tr>
@@ -27,6 +28,7 @@ and open the template in the editor.
                 <tr th:each="v : ${vendas}">
                     <td scope="row" th:text="${v.idVenda}"> </td>
                     <td th:text="${v.localDate}"> </td>
+                    <td th:text="${v.localTime}"> </td>
                     <td th:text="${v.QtdTotalItem}"> </td>                    
                     <td th:text="${v.TotalVenda()}"> </td>
                     <td th:text="${v.cliente.getNome()}"> </td>                  
@@ -35,15 +37,16 @@ and open the template in the editor.
             <table class="table">
                 <thead class="table-dark">
                     <tr>  
-                        <th>Produto</th>             
+                        <th>Produto</th>
+                        <th>Descrição</th>
                         <th>Quantidade</th>
                         <th>Preço Unitário</th>
-                        <th>Valor Total</th>
-                        
+                        <th>Valor Total</th>                       
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="table-light" th:each="i : ${itemVenda}">                
+                    <tr class="table-light" th:each="i : ${itemVenda}">
+                        <td th:text="${i.produto.nome}"> </td>
                         <td th:text="${i.produto.descricao}"> </td>
                         <td th:text="${i.quantidade}"> </td>
                         <td th:text="${#numbers.formatDecimal(i.produto.valor, 1, 2)}"> </td>
@@ -51,6 +54,9 @@ and open the template in the editor.
                     </tr>
                 </tbody>
             </table>
+            <div>
+                <label>Total da Compra: R$ </label><span th:each="v : ${vendas}" th:text="${v.TotalVenda()}"></span>
+            </div>
             <a role="button" class="btn btn-secondary" th:href="@{/vendas/saleslist}">Voltar</a>
         </div>
         <div th:insert="fragments/footer :: modelfooter"></div>

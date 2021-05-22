@@ -5,52 +5,25 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body class="jumbotron">
+    <body>
         <div th:insert="fragments/header :: modelheader"></div>
-        <div class="container">         
-            <table class="table table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Id</th>
-                        <th>Produto</th>             
-                        <th>Valor</th>
-                        <th>Quantidade</th>                    
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="p : ${produto}">
-                        <td scope="row" th:text="${p.idProduto}"> </td>
-                        <td th:text="${p.descricao}"> </td>
-                        <td th:text="${#numbers.formatDecimal(p.valor, 1, 2)}"> </td>
-                        <td> 
-                            <input type="hidden" th:value="${p.descricao}">
-                            <input type="hidden" th:value="${p.valor}">
-                            <form th:action="@{/vendas/add}" th:object="${itemVenda}" method="post">
-                                <input th:value="${p.idProduto}" th:name="produto.idProduto" type="hidden">
-                                <input type="number" required th:field="*{quantidade}" style="width:50px">
-                                <input role="button" type="submit" value="Add">                               
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div th:class="${!#strings.isEmpty(erroQtd)}?${'alert alert-danger d-flex'}">
-                <span th:text="${!#strings.isEmpty(erroQtd)}?${erroQtd}"></span>           
-            </div>
-            <br>
-
-            <h3>Carrinho de Compras</h3>
+        <div class="container">            
+            <h3>Meu Carrinho de Compras</h3>
             <table class="table">
                 <thead class="table-dark">
-                    <tr>  
-                        <th>Produto</th>             
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Produto</th>
+                        <th>Descrição</th>
                         <th>Quantidade</th>
                         <th>Total</th>
                         <th>Opções</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="table-light" th:each="i : ${session.venda.itemVenda}">                
+                    <tr class="table-light" th:each="i : ${session.venda.itemVenda}">
+                        <td th:text="${i.idItemVenda}"> </td>
+                        <td th:text="${i.produto.nome}"> </td>
                         <td th:text="${i.produto.descricao}"> </td>
                         <td th:text="${i.quantidade}"> </td>
                         <td th:text="${#numbers.formatDecimal(i.TotalItem(), 1, 2)}"> </td>
@@ -66,16 +39,19 @@
                 <span th:text="${!#strings.isEmpty(erroCliente)}?${erroCliente}"></span>            
             </div>
             <div style="right: 100px;">
-                <label>Total Compra: R$ </label><span th:text="${session.venda.TotalVenda()}"></span><br>               
-                <form th:action="@{/vendas/save}" th:object="${clientePF}" method="post">
-                    <label>Cliente: </label>
-                    <select th:name="idCliente" >
-                        <option th:value = 0 > - </option>
-                        <option th:each="c : ${clientePF}" th:text="${c.nome}" th:value="${c.idCliente}"></option>                      
-                    </select>
-                    <input role="button" class="btn btn-info" type="submit" value="Finalizar Compra">
-                </form>              
+                <div>
+                    <label>Total Compra: R$ </label><span th:text="${session.venda.TotalVenda()}"></span><br>               
+                    <form th:action="@{/vendas/save}" th:object="${clientePF}" method="post">
+                        <label>Cliente: </label>
+                        <select th:name="idCliente" >
+                            <option th:value = 0 > - </option>
+                            <option th:each="c : ${clientePF}" th:text="${c.nome}" th:value="${c.idCliente}"></option>                      
+                        </select>
+                        <input role="button" class="btn btn-info" type="submit" value="Finalizar Compra">
+                    </form>
+                </div>
             </div>
+            <a role="button" class="btn btn-secondary" th:href="@{/vendas/catalog}">Voltar</a>
             <br>           
         </div>
         <div th:insert="fragments/footer :: modelfooter"></div>

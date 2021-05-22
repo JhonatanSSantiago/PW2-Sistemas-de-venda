@@ -21,6 +21,9 @@ public class Produto implements Serializable {
     private int idProduto;
     
     @NotBlank
+    private String nome;
+    
+    @NotBlank
     private String descricao;
 
     @DecimalMin("0.1")
@@ -34,6 +37,14 @@ public class Produto implements Serializable {
         this.idProduto = idProduto;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
     public String getDescricao() {
         return descricao;
     }
@@ -49,10 +60,5 @@ public class Produto implements Serializable {
     public void setValor(double valor) {
         this.valor = valor;
     }
-
- /*   @Override
-    public String toString() {
-        return " " + descricao + " - Valor Unitário: " + valor + ' ';
-    } */
 
 }

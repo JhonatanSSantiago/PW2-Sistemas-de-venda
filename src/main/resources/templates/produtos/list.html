@@ -10,7 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body class="jumbotron">
+    <body>
         <div th:insert="fragments/header :: modelheader"></div>
         <div class="container">
             <table class="table table-striped">
@@ -18,12 +18,14 @@ and open the template in the editor.
                     <tr>
                         <th>Id</th>
                         <th>Produto</th>
+                        <th>Descrição</th>
                         <th>Valor</th>
                         <th colspan="2" class="text-center">Opções</th>
                     </tr>
                 </thead>
                 <tr th:each="p : ${produto}">
                     <td scope="row" th:text="${p.idProduto}"> </td>
+                    <td th:text="${p.nome}"> </td>
                     <td th:text="${p.descricao}"> </td>
                     <td th:text="${p.valor}"> </td>
                     <td><a role="button" class="btn btn-primary" th:href="@{/produtos/edit/{idProduto}(idProduto=${p.idProduto})}" >Editar</a> </td>

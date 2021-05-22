@@ -58,13 +58,20 @@ public class ControllerVenda {
      * faz referência ao objeto esperado no controller.
      */
     @GetMapping("/shoppingcart")
-    public ModelAndView shoppingcart(ItemVenda itemVenda) { //mostra lista de produtos
+    public ModelAndView shoppingcart(ItemVenda itemVenda) {
         ModelMap model = new ModelMap();
-        model.addAttribute("produto", produtorepository.produtos()); //mostra lista de produtos
-        model.addAttribute("clientePF", clientepfrepository.clientesPF());
+      //  model.addAttribute("produto", produtorepository.produtos()); //mostra lista de produtos
+        model.addAttribute("clientePF", clientepfrepository.clientesPF()); //mostra lista de clientes
         model.addAttribute("itemVenda", new ItemVenda());
         venda.TotalVenda();
         return new ModelAndView("/vendas/shoppingcart", model);
+    }
+    @GetMapping("/catalog")
+    public ModelAndView catalog(ItemVenda itemVenda) {
+        ModelMap model = new ModelMap();
+        model.addAttribute("produto", produtorepository.produtos()); //mostra lista de produtos
+        model.addAttribute("itemVenda", new ItemVenda());
+        return new ModelAndView("/vendas/catalog", model);
     }
 
     @GetMapping("/saleslist")
@@ -81,17 +88,11 @@ public class ControllerVenda {
         return new ModelAndView("/vendas/saledetails", model);
     }
     
-   /* @GetMapping("/saledetails")
-    public ModelAndView saledetails(Venda venda, ModelMap model) { //lista de venda
-        model.addAttribute("vendas", vendarepository.vendas());
-        return new ModelAndView("/vendas/salelist", model);
-    } */
-
     @PostMapping("/add")
     public ModelAndView add(ItemVenda itemVenda, RedirectAttributes attributes) {
         if (itemVenda.getQuantidade() == 0) {
             attributes.addFlashAttribute("erroQtd", "Quantidade deve ser maior que ou igual à 1");
-            return new ModelAndView("redirect:/vendas/shoppingcart");
+            return new ModelAndView("redirect:/vendas/catalog");
         }
         itemVenda.setVenda(venda);
         itemVenda.setProduto(produtorepository.produto(itemVenda.getProduto().getIdProduto()));
@@ -114,6 +115,7 @@ public class ControllerVenda {
         }
         this.venda.setId(0);
         this.venda.setLocalDate(venda.getLocalDate());
+        this.venda.setLocalTime(venda.getLocalTime());
         this.venda.TotalVenda();
         this.venda.setCliente(clientepfrepository.clientePF(clientePF.getIdCliente()));
         vendarepository.save(this.venda);

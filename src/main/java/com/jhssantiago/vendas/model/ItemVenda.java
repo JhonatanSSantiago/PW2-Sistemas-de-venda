@@ -69,9 +69,4 @@ public class ItemVenda implements Serializable {
         return this.produto.getValor() * this.quantidade;
     }
 
- /*   @Override
-    public String toString() {
-        return " " + quantidade + " - " + produto + ' ';
-    } */
-
 }

@@ -10,14 +10,16 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body class="jumbotron">
+    <body>
         <div th:insert="fragments/header :: modelheader"></div>
         <div class="container">
             <div class="row">               
                 <form class="col" th:action="${produto.idProduto == 0} ? @{/produtos/save} : @{/produtos/update}" th:object="${produto}" method="post">
                     <input type="hidden" th:field="*{idProduto}">
-                    Produto: <input class="form-control" type="text" th:field="*{descricao}" placeholder="Produto">
+                    Produto: <input class="form-control" type="text" th:field="*{nome}" placeholder="Produto">
+                    Descrição: <input class="form-control" type="text" th:field="*{descricao}" placeholder="Descrição">
                     Valor: <input class="form-control" type="text" th:field="*{valor}" placeholder="Valor">
+                    <br>
                     <div class="alert alert-danger d-flex" role="alert" th:each="erro : ${#fields.detailedErrors()}">
                         <span th:text="${erro.message}"></span>
                     </div>

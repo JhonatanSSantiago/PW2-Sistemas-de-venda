@@ -10,19 +10,19 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body class="jumbotron">
+    <body>
         <div th:insert="fragments/header :: modelheader"></div>
         <div class="container">
             <div >               
                 <form th:action="${clientePF.idCliente == 0} ? @{/clientes/save} : @{/clientes/update}" th:object="${clientePF}" method="post">
                     <input type="hidden" th:field="*{idCliente}">
                     Nome: <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome">
-                    CPF: <input class="form-control" type="text" th:field="*{CPF}" placeholder="CPF">                
-                    <input type="submit" class="btn btn-primary" value="Cadastrar">
+                    CPF: <input class="form-control" type="text" th:field="*{CPF}" placeholder="CPF">
                     <br>
                     <div class="alert alert-danger d-flex" role="alert" th:each="erro : ${#fields.detailedErrors()}">
                         <span th:text="${erro.message}"></span>
                     </div>
+                    <input type="submit" class="btn btn-primary" value="Cadastrar">
                 </form>
             </div>           
         </div>

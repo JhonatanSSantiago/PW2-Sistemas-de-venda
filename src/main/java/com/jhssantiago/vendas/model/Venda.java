@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import java.text.DecimalFormat; 
+import java.time.LocalTime;
 
 /**
  *
@@ -29,6 +30,8 @@ public class Venda implements Serializable {
     private int idVenda;
 
     private LocalDate localDate = LocalDate.now();
+    
+    private LocalTime localTime = LocalTime.now();   
 
     @ManyToOne
     private ClientePF cliente;
@@ -52,6 +55,14 @@ public class Venda implements Serializable {
         this.localDate = localDate;
     }
 
+    public LocalTime getLocalTime() {
+        return localTime;
+    }
+
+    public void setLocalTime(LocalTime localTime) {
+        this.localTime = localTime;
+    }
+ 
     public List<ItemVenda> getItemVenda() {
         return itemVenda;
     }
@@ -85,8 +96,4 @@ public class Venda implements Serializable {
         return QtdTotal;
     }
 
-    /*   @Override
-    public String toString() {
-        return "" + itemVenda + ' ';
-    } */
 }
