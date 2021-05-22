@@ -98,3 +98,11 @@ Da mesma forma, na consulta de CLIENTES, a funcionalidade deve ser a mesma.
 
 * Na consulta de CLIENTES crie um campo texto para filtrar CLIENTE por nome. :white_check_mark:
 * Na consulta de VENDAS crie a possibilidade de filtrar VENDAS por data. :white_check_mark:
+
+## Atividade 6
+
+Após adicionar o Spring Security no seu projeto
+
+ * Crie um form de login personalizado de sua preferência ou utilize o modelo disponível em login.html.
+ 
+Siga as instruções da aula VIDEO para desenvolver a atividade.
