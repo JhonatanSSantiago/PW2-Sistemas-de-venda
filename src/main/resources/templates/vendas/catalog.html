@@ -45,5 +45,12 @@ and open the template in the editor.
         <div th:class="${!#strings.isEmpty(erroQtd)}?${'alert alert-danger d-flex'}">
             <span th:text="${!#strings.isEmpty(erroQtd)}?${erroQtd}"></span>           
         </div>
+         <div th:insert="fragments/footer :: modelfooter"></div>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+            body {
+                font-family: 'Noto Sans', sans-serif;
+            }
+        </style>
     </body>
 </html>

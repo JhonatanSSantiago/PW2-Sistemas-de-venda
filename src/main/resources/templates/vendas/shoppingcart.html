@@ -12,7 +12,7 @@
             <table class="table">
                 <thead class="table-dark">
                     <tr>
-                        <th>Codigo</th>
+                        <th>Item</th>
                         <th>Produto</th>
                         <th>Descrição</th>
                         <th>Quantidade</th>
@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                     <tr class="table-light" th:each="i : ${session.venda.itemVenda}">
-                        <td th:text="${i.idItemVenda}"> </td>
+                        <td th:text="${i.idItemVenda+1}"> </td>
                         <td th:text="${i.produto.nome}"> </td>
                         <td th:text="${i.produto.descricao}"> </td>
                         <td th:text="${i.quantidade}"> </td>
@@ -38,21 +38,17 @@
             <div th:class="${!#strings.isEmpty(erroCliente)}?${'alert alert-danger d-flex'}">               
                 <span th:text="${!#strings.isEmpty(erroCliente)}?${erroCliente}"></span>            
             </div>
-            <div style="right: 100px;">
-                <div>
-                    <label>Total Compra: R$ </label><span th:text="${session.venda.TotalVenda()}"></span><br>               
-                    <form th:action="@{/vendas/save}" th:object="${clientePF}" method="post">
-                        <label>Cliente: </label>
-                        <select th:name="idCliente" >
-                            <option th:value = 0 > - </option>
-                            <option th:each="c : ${clientePF}" th:text="${c.nome}" th:value="${c.idCliente}"></option>                      
-                        </select>
-                        <input role="button" class="btn btn-info" type="submit" value="Finalizar Compra">
-                    </form>
-                </div>
-            </div>
-            <a role="button" class="btn btn-secondary" th:href="@{/vendas/catalog}">Voltar</a>
-            <br>           
+            <form class="float-right" th:action="@{/vendas/save}" th:object="${clientePF}" method="post">
+                <label>Cliente: </label>
+                <select th:name="idCliente" >
+                    <option th:value = 0 > - </option>
+                    <option th:each="c : ${clientePF}" th:text="${c.nome}" th:value="${c.idCliente}"></option>                      
+                </select>
+                <label>Total Compra: R$ </label><span th:text="${session.venda.TotalVenda()}"></span>
+                <input role="button" class="btn btn-primary" type="submit" value="Finalizar Compra">
+            </form>
+                  
+            <a role="button" class="btn btn-secondary" th:href="@{/vendas/catalog}">Adicionar mais itens</a>           
         </div>
         <div th:insert="fragments/footer :: modelfooter"></div>
         <style>

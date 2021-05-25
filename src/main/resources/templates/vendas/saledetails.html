@@ -36,7 +36,7 @@ and open the template in the editor.
             </table>
             <table class="table">
                 <thead class="table-dark">
-                    <tr>  
+                    <tr> 
                         <th>Produto</th>
                         <th>Descrição</th>
                         <th>Quantidade</th>
@@ -45,7 +45,7 @@ and open the template in the editor.
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="table-light" th:each="i : ${itemVenda}">
+                    <tr class="table-light" th:each="i : ${itemVenda}">          
                         <td th:text="${i.produto.nome}"> </td>
                         <td th:text="${i.produto.descricao}"> </td>
                         <td th:text="${i.quantidade}"> </td>
@@ -54,7 +54,7 @@ and open the template in the editor.
                     </tr>
                 </tbody>
             </table>
-            <div>
+            <div class="float-right">
                 <label>Total da Compra: R$ </label><span th:each="v : ${vendas}" th:text="${v.TotalVenda()}"></span>
             </div>
             <a role="button" class="btn btn-secondary" th:href="@{/vendas/saleslist}">Voltar</a>
