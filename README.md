@@ -106,3 +106,10 @@ Após adicionar o Spring Security no seu projeto  :white_check_mark:
  * Crie um form de login personalizado de sua preferência ou utilize o modelo disponível em login.html. :white_check_mark:
  
 Siga as instruções da aula VIDEO para desenvolver a atividade.
+
+
+## Atividade 8
+
+Complemente o projeto CARRINHO DE COMPRAS incluindo o controle de acesso com Spring Security conforme vídeo da aula.
+
+Você deve definir o controle de acesso de acordo ao perfil de usuário adequado para seu projeto.
