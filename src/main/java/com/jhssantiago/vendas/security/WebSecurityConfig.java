@@ -19,6 +19,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests() //define com as requisições HTTP devem ser tratadas com relação à segurança.
                 .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/produtos/registration").hasAnyRole("ADMIN")
+                .antMatchers("/produtos/list").hasAnyRole("ADMIN")
+                .antMatchers("/clientes/form").hasAnyRole("ADMIN")
+                .antMatchers("/clientes/list").hasAnyRole("ADMIN")
+                .antMatchers("/vendas/saleslist").hasAnyRole("ADMIN")
                 .anyRequest() //define que a configuração é válida para qualquer requisição.
                 .authenticated() //define que o usuário precisa estar autenticado.
                 .and()
@@ -35,7 +40,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         builder
                 .inMemoryAuthentication()
-                .withUser("teste").password("$2a$10$wTcCFdoXbd6dY./pZxhdOuUytI1SjMPyHCGTe8rS23s9O/xoh9Yty").roles("EDITOR", "ADMIN");
+                .withUser("teste").password("$2a$10$wTcCFdoXbd6dY./pZxhdOuUytI1SjMPyHCGTe8rS23s9O/xoh9Yty").roles("EDITOR");
+        builder
+                .inMemoryAuthentication()
+                .withUser("admin").password("$2a$10$WB2Kq8ELCz2qFynlpjINpuGcmC9Lb7OfyemLLluIII3aYKeHKctRq").roles("ADMIN");
     }
 
      /**

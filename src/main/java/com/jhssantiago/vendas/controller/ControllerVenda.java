@@ -120,7 +120,7 @@ public class ControllerVenda {
         this.venda.setCliente(clientepfrepository.clientePF(clientePF.getIdCliente()));
         vendarepository.save(this.venda);
         this.venda.getItemVenda().clear();
-        return new ModelAndView("redirect:/vendas/saleslist");
+        return new ModelAndView("redirect:/vendas/catalog");
     }
 
     /**

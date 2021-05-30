@@ -31,19 +31,19 @@ and open the template in the editor.
                             <li class="nav-item">
                                 <a class="nav-link text-white" th:href="@{/vendas/catalog}">Catálogo</a>
                             </li>
-                            <div id="navbarNavDarkDropdown">
+                            <div sec:authorize="hasRole('ADMIN')" id="navbarNavDarkDropdown">
                                 <ul class="navbar-nav">
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Gerência
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                            <li><a class="dropdown-item" th:href="@{/produtos/registration}">Cadastrar Produtos</a></li>
-                                            <li><a class="dropdown-item" th:href="@{/produtos/list}">Gerenciar Produtos</a></li>
-                                            <li><a class="dropdown-item" th:href="@{/clientes/form}">Cadastrar Clientes</a></li>
-                                            <li><a class="dropdown-item" th:href="@{/clientes/list}">Gerenciar Clientes</a></li>
+                                            <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/produtos/registration}">Cadastrar Produtos</a></li>
+                                            <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/produtos/list}">Gerenciar Produtos</a></li>
+                                            <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/clientes/form}">Cadastrar Clientes</a></li>
+                                            <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/clientes/list}">Gerenciar Clientes</a></li>
                                             <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" th:href="@{/vendas/saleslist}">Vendas</a></li>
+                                            <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/vendas/saleslist}">Vendas</a></li>
                                         </ul>
                                     </li>
                                 </ul>
