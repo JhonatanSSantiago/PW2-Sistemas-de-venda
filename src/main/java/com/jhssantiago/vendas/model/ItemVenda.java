@@ -24,7 +24,7 @@ public class ItemVenda implements Serializable {
     @Id
     private int idItemVenda;
     
-    @Min(1)
+    @Positive
     private int quantidade;
 
     @OneToOne(cascade = CascadeType.MERGE)

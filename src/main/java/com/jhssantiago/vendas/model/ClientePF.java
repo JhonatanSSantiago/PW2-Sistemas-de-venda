@@ -13,7 +13,6 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "tb_clientepf")
 public class ClientePF extends Cliente implements Serializable {
 
-
     @NotBlank
     private String CPF;
 

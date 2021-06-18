@@ -12,40 +12,37 @@ and open the template in the editor.
     </head>
     <body>
         <div th:insert="fragments/header :: modelheader"></div>
-        <div  class="container">
-        <table class="table table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>Código</th>
-                    <th>Produto</th>
-                    <th>Descrição</th>
-                    <th>Valor</th>
-                    <th>Quantidade</th>                    
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="p : ${produto}">
-                    <td scope="row" th:text="${p.idProduto}"> </td>
-                    <td th:text="${p.nome}"> </td>
-                    <td th:text="${p.descricao}"> </td>
-                    <td th:text="${#numbers.formatDecimal(p.valor, 1, 2)}"> </td>
-                    <td> 
-                        <input type="hidden" th:value="${p.descricao}">
-                        <input type="hidden" th:value="${p.valor}">
-                        <form th:action="@{/vendas/add}" th:object="${itemVenda}" method="post">
-                            <input th:value="${p.idProduto}" th:name="produto.idProduto" type="hidden">
-                            <input type="number" required th:field="*{quantidade}" style="width:50px">
-                            <input role="button" type="submit" value="Add">                               
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
+        <main class="container py-3">
+            <form th:action="@{/vendas/buscarforname}" method="get">
+                <input type="text" th:value="@{nome}" th:name="nome">
+                <input type="submit" value="buscar">
+            </form>
+            <br>
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" >
+                <div class="col" th:each="p : ${produto}">
+                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                        <div class="card-header py-3">
+                            <h4 class="card-header py-3 text-white bg-primary border-primary" th:text="${p.nome}"></h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li th:text="${p.descricao}"></li>
+                            </ul>
+                            <label>R$ <strong class="card-title pricing-card-title" th:text="${#numbers.formatDecimal(p.valor, 1, 2)}"> </strong></label>
+                            <form th:action="@{/vendas/add}" th:object="${itemVenda}" method="post">
+                                <input th:value="${p.idProduto}" th:name="produto.idProduto" type="hidden">
+                                <input type="number" required th:field="*{quantidade}" style="width:50px">
+                                <input class="w-50 btn btn-outline-primary" role="button" type="submit" value="Comprar">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
         <div th:class="${!#strings.isEmpty(erroQtd)}?${'alert alert-danger d-flex'}">
-            <span th:text="${!#strings.isEmpty(erroQtd)}?${erroQtd}"></span>           
+            <span th:text="${!#strings.isEmpty(erroQtd)}?${erroQtd}"></span>
         </div>
-         <div th:insert="fragments/footer :: modelfooter"></div>
+        <div th:insert="fragments/footer :: modelfooter"></div>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
             body {

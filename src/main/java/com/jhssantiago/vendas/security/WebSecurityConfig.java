@@ -10,18 +10,28 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/*
+*
+* .antMatchers("/cliente/form").permitAll()
+*/
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    UsuarioDetailsConfig usuarioDetailsConfig;
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests() //define com as requisições HTTP devem ser tratadas com relação à segurança.
                 .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/clientes/formuser").permitAll()
+                .antMatchers("/clientes/salvar").permitAll()
+                .antMatchers("/clientes/editar").permitAll()
+                .antMatchers("/clientes/form").permitAll()
                 .antMatchers("/produtos/registration").hasAnyRole("ADMIN")
                 .antMatchers("/produtos/list").hasAnyRole("ADMIN")
-                .antMatchers("/clientes/form").hasAnyRole("ADMIN")
                 .antMatchers("/clientes/list").hasAnyRole("ADMIN")
                 .antMatchers("/vendas/saleslist").hasAnyRole("ADMIN")
                 .anyRequest() //define que a configuração é válida para qualquer requisição.
@@ -38,12 +48,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureUserDetails(AuthenticationManagerBuilder builder)
             throws Exception {
+        /*   
         builder
                 .inMemoryAuthentication()
                 .withUser("teste").password("$2a$10$wTcCFdoXbd6dY./pZxhdOuUytI1SjMPyHCGTe8rS23s9O/xoh9Yty").roles("EDITOR");
         builder
                 .inMemoryAuthentication()
                 .withUser("admin").password("$2a$10$WB2Kq8ELCz2qFynlpjINpuGcmC9Lb7OfyemLLluIII3aYKeHKctRq").roles("ADMIN");
+        */
+        builder.userDetailsService(usuarioDetailsConfig).passwordEncoder(new BCryptPasswordEncoder());
+             
+                
     }
 
      /**

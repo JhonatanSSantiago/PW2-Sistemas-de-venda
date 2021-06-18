@@ -1,5 +1,6 @@
 package com.jhssantiago.vendas.repository;
 import com.jhssantiago.vendas.model.Venda;
+import com.jhssantiago.vendas.model.ClientePF;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -43,19 +44,23 @@ public class VendaRepository {
     }
     
     @SuppressWarnings("unchecked")
-    public List<Venda> venda(int idVenda){
-        String sql = "from Venda as v where v.idVenda = :idVenda";
-        Query query = em.createQuery(sql, Venda.class);
+    public List<Venda> venda(int idVenda){ //Listar todas as vendas
+        Query query = em.createQuery("from Venda as v where v.idVenda = :idVenda", Venda.class);
         query.setParameter("idVenda", idVenda);
         return query.getResultList();
     }
     
     @SuppressWarnings("unchecked")
-    public List<Venda> vendas(LocalDate localDate) {
-        String hql = "from Venda as v where v.localDate = :localDate";
-        Query query = em.createQuery(hql, Venda.class);
+    public List<Venda> vendasData(LocalDate localDate) { //Listar por data
+        Query query = em.createQuery("from Venda as v where v.localDate = :localDate", Venda.class);
         query.setParameter("localDate", localDate);
         return query.getResultList();
     }
     
+    @SuppressWarnings("unchecked")
+    public List<Venda> clienteVendas(ClientePF clientePF) { //Listar Vendas de um cliente
+        Query query = em.createQuery("from Venda as v where v.cliente = :clientePF", Venda.class);
+        query.setParameter("clientePF", clientePF);
+        return query.getResultList();
+    }    
 }

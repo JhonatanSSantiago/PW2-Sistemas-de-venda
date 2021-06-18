@@ -20,9 +20,9 @@ import java.time.LocalTime;
  *
  * @author jhons
  */
+@Entity
 @Scope("session")
 @Component
-@Entity
 public class Venda implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

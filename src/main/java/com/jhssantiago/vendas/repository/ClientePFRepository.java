@@ -1,11 +1,13 @@
 package com.jhssantiago.vendas.repository;
 
 import com.jhssantiago.vendas.model.ClientePF;
+import com.jhssantiago.vendas.model.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.springframework.transaction.annotation.Transactional;
+import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -44,9 +46,14 @@ public class ClientePFRepository {
     
     @SuppressWarnings("unchecked")
     public List<ClientePF> clientes(String nome) {
-        String hql = "from ClientePF as c where c.nome = :nome";
-        Query query = em.createQuery(hql, ClientePF.class);
-        query.setParameter("nome", nome);
+        Query query = em.createQuery("from ClientePF as c where c.nome like :nome", ClientePF.class);
+        query.setParameter("nome", "%"+nome+"%");
         return query.getResultList();  
+    }
+    
+    public ClientePF clientePF(Usuario usuario) {//Retorna um cliente pelo usuário
+        TypedQuery<ClientePF> query = em.createQuery("from ClientePF as c where c.usuario = :usuario", ClientePF.class);
+        query.setParameter("usuario",usuario);
+        return query.getSingleResult();
     }
 }

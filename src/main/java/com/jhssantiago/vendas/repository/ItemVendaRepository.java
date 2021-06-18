@@ -23,30 +23,30 @@ public class ItemVendaRepository {
         return em.find(ItemVenda.class, idItemVenda);
     }
 
-    public void save(ItemVenda itemVenda) {
+    public void save(ItemVenda itemVenda) {//salva item
         em.persist(itemVenda);
     }
 
+    public void remove(int idItemVenda) {//remove item
+        ItemVenda i = em.find(ItemVenda.class, idItemVenda);
+        em.remove(i);
+    }
+
+    public void update(ItemVenda itemVenda) {//atualiza item
+        em.merge(itemVenda);
+    }
+
     @SuppressWarnings("unchecked")
-    public List<ItemVenda> itemVendas() {
+    public List<ItemVenda> itemVendas() { //lista todos itens de uma venda
         Query query = em.createQuery("from ItemVenda");
         return query.getResultList();
     }
-    
+
     @SuppressWarnings("unchecked")
-    public List<ItemVenda> itemVendas(int idVenda) {
-        String sql = "from ItemVenda as i where i.venda.idVenda = :idVenda";
-        Query query = em.createQuery(sql,ItemVenda.class);
+    public List<ItemVenda> itemVendas(int idVenda) { //lista todos itens de uma venda
+        Query query = em.createQuery("from ItemVenda as i where i.venda.idVenda = :idVenda", ItemVenda.class);
         query.setParameter("idVenda", idVenda);
         return query.getResultList();
     }
 
-    public void remove(int idItemVenda) {
-        ItemVenda i = em.find(ItemVenda.class, idItemVenda);
-        em.remove(i);
-    }
-    
-   public void update(ItemVenda itemVenda){
-        em.merge(itemVenda);
-    }
 }

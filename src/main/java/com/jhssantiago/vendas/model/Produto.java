@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 /**
  *
@@ -26,6 +27,7 @@ public class Produto implements Serializable {
     @NotBlank
     private String descricao;
 
+    @Positive
     @DecimalMin("0.1")
     private double valor;
 

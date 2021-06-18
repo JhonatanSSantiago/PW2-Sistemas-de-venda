@@ -1,5 +1,26 @@
-#  PW2 Sistemas de Vendas
+#  Programação para Web 2 - Projeto Final - Sistemas de Vendas
 
+1) O projeto deve ser desenvolvido utilizando as tecnologias/recursos utilizadas em nossas aulas;
+
+2) Requisitos necessários:
+
+* Algumas ações são efetuadas por administradores e outras por clientes. :white_check_mark:
+
+* O sistema deve permitir que o cliente faça seu cadastro para acesso ao sistema; :white_check_mark:
+
+- Cadastro de produtos; :white_check_mark:
+
+- Cadastro de clientes; :white_check_mark:
+
+- Efetuar compra; :white_check_mark:
+
+- Consultar compras efetuadas por cliente. Os Administrações podem consultar todas as compras; :white_check_mark:
+
+- Autenticação e controle de acesso para clientes e administradores; :white_check_mark:
+
+- Validação de dados; :white_check_mark:
+
+(Passos Feitos nas Atividades)
 ## Atividade 1
 
 Com JPA você aprendeu que podemos gerar nossas tabelas no banco de dados usando anotações. Deste modo, crie um novo projeto e crie entidades conforme diagrama de classe a seguir.

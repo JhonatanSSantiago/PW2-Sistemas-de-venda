@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>Cadastrar Usuario</title>
+        <title>Cadastro de Administrador</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div th:insert="fragments/header :: modelheader"></div>
         <div class="container">
-            <div >               
-                <form th:action="${clientePF.idCliente == 0} ? @{/clientes/save} : @{/clientes/update}" th:object="${clientePF}" method="post">
-                    <input type="hidden" th:field="*{idCliente}">
+            <div>
+                <div th:class="${!#strings.isEmpty(erroLogin)}?${'alert alert-danger d-flex'}">
+                    <span th:text="${!#strings.isEmpty(erroLogin)}?${erroLogin}"></span>           
+                </div>
+                <form th:action="@{/clientes/salvaradm}" th:object="${clientePF}" method="post">
+                    <input type="hidden" th:field="*{idCliente}">                
                     Nome: <input class="form-control" type="text" th:field="*{nome}">
                     CPF: <input class="form-control cpf" type="text" th:field="*{CPF}">
                     Login: <input class="form-control" type="text" th:field="*{usuario.login}">
@@ -26,7 +24,7 @@ and open the template in the editor.
                     </div>
                     <input type="submit" class="btn btn-primary" value="Cadastrar">
                 </form>
-            </div>           
+            </div>
         </div>
         <div th:insert="fragments/footer :: modelfooter"></div>
         <style>

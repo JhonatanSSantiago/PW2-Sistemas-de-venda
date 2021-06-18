@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Atualizar Dados</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div th:insert="fragments/header :: modelheader"></div>
+        <div class="container">
+            <div>
+                <div th:class="${!#strings.isEmpty(erroAtualizar)}?${'alert alert-danger d-flex'}">
+                    <span th:text="${!#strings.isEmpty(erroAtualizar)}?${erroAtualizar}"></span>           
+                </div>
+                <div th:class="${!#strings.isEmpty(atualizado)}?${'alert alert-info d-flex'}">
+                    <span th:text="${!#strings.isEmpty(atualizado)}?${atualizado}"></span>           
+                </div>
+                <form th:action="@{/clientes/update}" th:object="${clientePF}" method="post">
+                    <input type="hidden" th:field="*{idCliente}">
+                    Nome: <input class="form-control" type="text" th:field="*{nome}">
+                    CPF: <input class="form-control cpf" type="text" th:field="*{CPF}">
+                    Login: <input class="form-control" type="text" th:field="*{usuario.login}">
+                    Senha: <input class="form-control" type="password" th:field="*{usuario.password}" placeholder="Insira a mesma senha ou mude para altera-la">                                
+                    <input type="submit" class="btn btn-primary" value="Atualizar">
+                </form>
+                <br>
+                <a role="button" class="btn btn-secondary" sec:authorize="hasRole('EDITOR')"th:href="@{/home}">Voltar</a>
+                <a role="button" class="btn btn-secondary" sec:authorize="hasRole('ADMIN')" th:href="@{/clientes/list}">Voltar</a>
+            </div>           
+        </div>
+        <div th:insert="fragments/footer :: modelfooter"></div>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+            body {
+                font-family: 'Noto Sans', sans-serif;
+            }         
+        </style>
+    </body>
+</html>

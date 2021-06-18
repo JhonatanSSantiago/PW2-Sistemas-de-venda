@@ -39,4 +39,12 @@ public class ProdutoRepository {
     public void update(Produto produto) {
         em.merge(produto);
     }
+    
+    @SuppressWarnings("unchecked")
+    public List<Produto> buscarProduto(String nome) {
+        Query query = em.createQuery("from Produto as p where p.nome like :nome", Produto.class);
+        query.setParameter("nome", "%"+nome+"%");
+        return query.getResultList();
+    }
+
 }

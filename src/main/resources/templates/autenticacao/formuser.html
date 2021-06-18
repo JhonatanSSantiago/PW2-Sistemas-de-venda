@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Cadastro de Usuario</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" rel="stylesheet"/>
+    </head>
+    <body class="text-center">
+        <main class="container">           
+            <div th:class="${!#strings.isEmpty(erroCadastro)}?${'alert alert-danger d-flex'}">
+                <span th:text="${!#strings.isEmpty(erroCadastro)}?${erroCadastro}"></span>           
+            </div>
+            <form th:action="@{/clientes/salvar}" th:object="${clientePF}" method="post">
+                <h5 class="card-header">Faça seu cadastro</h5>
+                <input type="hidden" th:field="*{idCliente}">
+                <div class="form-floating">
+                    Nome: <input class="form-control" type="text" th:field="*{nome}">
+                </div>
+                <div class="form-floating">
+                    CPF: <input class="form-control cpf" type="text" th:field="*{CPF}">
+                </div>
+                <div class="form-floating">
+                    Login: <input class="form-control" type="text" th:field="*{usuario.login}">
+                </div>
+                <div class="form-floating">
+                    Senha: <input class="form-control" type="password" th:field="*{usuario.password}">
+                </div>
+                <br>
+                <div class="alert alert-danger d-flex" role="alert" th:each="erro : ${#fields.detailedErrors()}">
+                    <span th:text="${erro.message}"></span>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Cadastrar">
+            </form>
+            <p class="mt-5 mb-3 text-muted">&copy; 2021 Programação para WEB II - Jhonatan Santiago</p>
+        </main>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+            body {
+                font-family: 'Noto Sans', sans-serif;
+            }         
+        </style>
+    </body>
+</html>
