@@ -6,23 +6,41 @@
         <link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" rel="stylesheet"/>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     </head>
-    <body>    
-        <header class="p-3 bg-dark text-white">
+    <body class="container bg-light">    
+        <div class="p-3 bg-dark text-white">
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <a href="/">
                         <img width="20%"  th:src="@{/img/logo.png}" alt="logo">                       
                     </a>
+                    <div class="position-absolute top-0 start-50 translate-middle"></div>
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                         <li>
                             <a class="nav-link text-white" th:href="@{/home}">Home</a>
                         </li>
                         <li>
-                            <a class="nav-link text-white" th:href="@{/vendas/catalog}">Catálogo</a>
+                            <a class="nav-link text-white" th:href="@{/vendas/catalog}" sec:authorize="hasRole('EDITOR')">Catálogo</a>
                         </li>
                         <li>
                             <a class="nav-link px-2 text-white" role="button" sec:authorize="hasRole('EDITOR')" th:href="@{/vendas/shoppingcart}">Meu Carrinho</a>
-                        </li>    
+                        </li>
+                        <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                            <a href="#" class="nav-link dropdown-toggle text-decoration-none text-white" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Cadastrar</a>
+                            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" sec:authorize="hasRole('ADMIN')">          
+                                <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/produtos/registration}">Produtos</a></li>
+                                <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/clientes/form}">Clientes</a></li>
+                                <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/clientes/formadm}">Administrador</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                            <a href="#" class="nav-link dropdown-toggle text-decoration-none text-white" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Gerenciar</a>
+                            </a>
+                            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" sec:authorize="hasRole('ADMIN')">          
+                                <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/produtos/list}">Produtos</a></li>
+                                <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/clientes/list}">Usuarios</a></li>
+                                <li><a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{/vendas/saleslist}">Vendas</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <div class="dropdown text-end">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,8 +69,7 @@
                     </div>
                 </div>
             </div>
-        </header>
-        <hr>
+        </div>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
             body {
@@ -60,3 +77,4 @@
             }         
         </style>       
 
+        <main class="flex-shrink-0 mt-3">

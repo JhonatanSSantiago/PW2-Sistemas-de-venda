@@ -69,7 +69,7 @@ public class ControllerClientePF {
     }
     
     @PostMapping("/salvar")
-    public ModelAndView salvar(@Valid ClientePF clientePF, BindingResult result, RedirectAttributes attributes) {
+    public ModelAndView salvar(@Valid ClientePF clientePF, BindingResult result, RedirectAttributes attributes) { //salva usuario
         if(result.hasErrors()) {
             attributes.addFlashAttribute("erroCadastro", "Informe Nome e CPF!");
             return formuser(clientePF);           
@@ -87,13 +87,13 @@ public class ControllerClientePF {
     }
 
     @GetMapping("/list")
-    public ModelAndView listar(ModelMap model) {
+    public ModelAndView listar(ModelMap model) { //lista todos usuarios
         model.addAttribute("clientePF", clientepfrepository.clientesPF());
         return new ModelAndView("/clientes/list", model);
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@Valid ClientePF clientePF, BindingResult result, RedirectAttributes attributes) {
+    public ModelAndView save(@Valid ClientePF clientePF, BindingResult result, RedirectAttributes attributes) { //salva novo usuario pelo adm
         if(result.hasErrors()){
             return form(clientePF);
         }
@@ -103,7 +103,7 @@ public class ControllerClientePF {
     }
     
     @PostMapping("/salvaradm")
-    public ModelAndView salvaradm(@Valid ClientePF clientePF, BindingResult result, RedirectAttributes attributes) {
+    public ModelAndView salvaradm(@Valid ClientePF clientePF, BindingResult result, RedirectAttributes attributes) { //salvar novo adm
         if(result.hasErrors()) {
             return formadm(clientePF);
         }
@@ -169,7 +169,7 @@ public class ControllerClientePF {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(ClientePF clientePF, RedirectAttributes attributes) {
+    public ModelAndView update(ClientePF clientePF, RedirectAttributes attributes) { //atualiza perfil
         if(clientePF.getUsuario().getPassword().isEmpty() || clientePF.getUsuario().getLogin().isEmpty() ){
             attributes.addFlashAttribute("erroAtualizar", "Insiria sua senha!!");
             return new ModelAndView("redirect:/clientes/editar");
@@ -186,7 +186,7 @@ public class ControllerClientePF {
     }
     
     @GetMapping("/buscarforname")
-    public ModelAndView buscarforname(@RequestParam(value = "nome") String nome, ModelMap model) {
+    public ModelAndView buscarforname(@RequestParam(value = "nome") String nome, ModelMap model) { //busca cliente
         model.addAttribute("clientePF", clientepfrepository.clientes(nome));
         return new ModelAndView("/clientes/list");
     }

@@ -12,36 +12,38 @@ and open the template in the editor.
     </head>
     <body>
         <div th:insert="fragments/header :: modelheader"></div>
-        <main class="container py-3">
-            <form th:action="@{/vendas/buscarforname}" method="get">
-                <input type="text" th:value="@{nome}" th:name="nome">
-                <input type="submit" value="buscar">
-            </form>
+        <main class="container">
+            <div class="bg-dark p-3 text-white inline-block">
+                <h3 class="text-center">Catálogo</h3>
+                <form th:action="@{/vendas/buscarforname}" method="get">
+                    <input type="text" th:value="@{nome}" th:name="nome">
+                    <input class="btn btn-light btn-sm" type="submit" value="buscar">
+                    <a class="btn btn-light btn-sm" th:href="@{/vendas/catalog}">Limpar</a>
+                </form>
+            </div>
             <br>
+            <div th:class="${!#strings.isEmpty(erroQtd)}?${'alert alert-danger d-flex'}">
+                <span th:text="${!#strings.isEmpty(erroQtd)}?${erroQtd}"></span>
+            </div>
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" >
                 <div class="col" th:each="p : ${produto}">
-                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                        <div class="card-header py-3">
-                            <h4 class="card-header py-3 text-white bg-primary border-primary" th:text="${p.nome}"></h4>
-                        </div>
+                    <div class="card text-center border-primary" style="width: 18rem;">
                         <div class="card-body">
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li th:text="${p.descricao}"></li>
-                            </ul>
-                            <label>R$ <strong class="card-title pricing-card-title" th:text="${#numbers.formatDecimal(p.valor, 1, 2)}"> </strong></label>
+                            <h5 class="card-title p-2 bg-primary border-primary text-white" th:text="${p.nome}"></h5>
+                            <p class="card-text" th:text="${p.descricao}"></p>
+                            <label>R$ <strong class="card-text" th:text="${#numbers.formatDecimal(p.valor, 1, 2)}"> </strong></label>
                             <form th:action="@{/vendas/add}" th:object="${itemVenda}" method="post">
                                 <input th:value="${p.idProduto}" th:name="produto.idProduto" type="hidden">
                                 <input type="number" required th:field="*{quantidade}" style="width:50px">
-                                <input class="w-50 btn btn-outline-primary" role="button" type="submit" value="Comprar">
+                                <input class="btn btn-primary" role="button" type="submit" value="Comprar">
                             </form>
                         </div>
                     </div>
+                    <br>
                 </div>
             </div>
         </main>
-        <div th:class="${!#strings.isEmpty(erroQtd)}?${'alert alert-danger d-flex'}">
-            <span th:text="${!#strings.isEmpty(erroQtd)}?${erroQtd}"></span>
-        </div>
+
         <div th:insert="fragments/footer :: modelfooter"></div>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');

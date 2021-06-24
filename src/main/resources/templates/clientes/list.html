@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>Lista de Usuario</title>
+        <title>Usuários Cadastrados</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div th:insert="fragments/header :: modelheader"></div>
-        <div class="container">
-            <form th:action="@{/clientes/buscarforname}" method="get">
-                <input type="text" th:value="@{nome}" th:name="nome">
-                <input type="submit" value="buscar">
-            </form>
-            <br>
-            <div th:class="${!#strings.isEmpty(cadastro)}?${'alert alert-info d-flex'}">
-                <span th:text="${!#strings.isEmpty(cadastro)}?${cadastro}"></span>           
-            </div>
-             <div th:class="${!#strings.isEmpty(erroExcluir)}?${'alert alert-danger d-flex'}">
-                <span th:text="${!#strings.isEmpty(erroExcluir)}?${erroExcluir}"></span>           
-            </div>
+        <div class="container bg-light">         
+            <hr>
+            <div class="bg-dark p-3 text-white inline-block">
+                <h3 class="text-center">Usuários Cadastrados</h3>
+                <form th:action="@{/clientes/buscarforname}" method="get">
+                    <input type="text" th:value="@{nome}" th:name="nome">
+                    <input class="btn btn-light btn-sm" type="submit" value="buscar">
+                    <a class="btn btn-light btn-sm" th:href="@{/clientes/list}">Limpar</a>
+                </form>
+            </div>                   
             <table class="table table-striped">
+                <div th:class="${!#strings.isEmpty(cadastro)}?${'alert alert-info d-flex'}">
+                    <span th:text="${!#strings.isEmpty(cadastro)}?${cadastro}"></span>           
+                </div>
+                <div th:class="${!#strings.isEmpty(erroExcluir)}?${'alert alert-danger d-flex'}">
+                    <span th:text="${!#strings.isEmpty(erroExcluir)}?${erroExcluir}"></span>           
+                </div>
                 <thead class="table-dark">
                     <tr>
                         <th>Id</th>
@@ -41,6 +40,7 @@ and open the template in the editor.
                 </tr>
             </table>           
         </div>
+        <hr>
         <div th:insert="fragments/footer :: modelfooter"></div>
 
         <style>

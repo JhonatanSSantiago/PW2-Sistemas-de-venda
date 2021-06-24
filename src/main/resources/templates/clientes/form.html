@@ -13,7 +13,12 @@ and open the template in the editor.
     <body>
         <div th:insert="fragments/header :: modelheader"></div>
         <div class="container">
-            <div >               
+            <hr>
+            <div class="bg-dark p-3 text-white">
+                <h3 class="text-left">Cadastro de Cliente</h3>
+            </div>
+            <hr>
+            <div>               
                 <form th:action="${clientePF.idCliente == 0} ? @{/clientes/save} : @{/clientes/update}" th:object="${clientePF}" method="post">
                     <input type="hidden" th:field="*{idCliente}">
                     Nome: <input class="form-control" type="text" th:field="*{nome}">
@@ -24,10 +29,11 @@ and open the template in the editor.
                     <div class="alert alert-danger d-flex" role="alert" th:each="erro : ${#fields.detailedErrors()}">
                         <span th:text="${erro.message}"></span>
                     </div>
-                    <input type="submit" class="btn btn-primary" value="Cadastrar">
+                    <input type="submit" class="btn btn-primary text-center" value="Cadastrar">
                 </form>
             </div>           
         </div>
+        <hr>
         <div th:insert="fragments/footer :: modelfooter"></div>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');

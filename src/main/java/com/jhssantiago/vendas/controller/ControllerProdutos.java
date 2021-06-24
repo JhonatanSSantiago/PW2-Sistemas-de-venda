@@ -88,5 +88,10 @@ public class ControllerProdutos {
         produtorepository.update(produto);
         return new ModelAndView("redirect:/produtos/list");
     }
-       
+    
+    @GetMapping("/buscarforname")
+    public ModelAndView buscarforname(@RequestParam(value = "nome") String nome, ModelMap model) {
+        model.addAttribute("produto", produtorepository.buscarProduto(nome));
+        return new ModelAndView("/produtos/list");
+    }
 }

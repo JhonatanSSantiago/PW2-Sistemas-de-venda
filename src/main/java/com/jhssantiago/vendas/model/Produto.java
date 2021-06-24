@@ -28,7 +28,6 @@ public class Produto implements Serializable {
     private String descricao;
 
     @Positive
-    @DecimalMin("0.1")
     private double valor;
 
     public int getIdProduto() {

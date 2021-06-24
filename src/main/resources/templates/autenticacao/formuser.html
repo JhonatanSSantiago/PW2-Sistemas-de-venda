@@ -11,8 +11,8 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" rel="stylesheet"/>
     </head>
-    <body class="text-center">
-        <main class="container">           
+    <body class="text-center">        
+        <main class="form-signin">           
             <div th:class="${!#strings.isEmpty(erroCadastro)}?${'alert alert-danger d-flex'}">
                 <span th:text="${!#strings.isEmpty(erroCadastro)}?${erroCadastro}"></span>           
             </div>
@@ -20,30 +20,50 @@ and open the template in the editor.
                 <h5 class="card-header">Faça seu cadastro</h5>
                 <input type="hidden" th:field="*{idCliente}">
                 <div class="form-floating">
-                    Nome: <input class="form-control" type="text" th:field="*{nome}">
+                    <label>Nome: <input class="form-control" type="text" th:field="*{nome}"></label>
                 </div>
                 <div class="form-floating">
-                    CPF: <input class="form-control cpf" type="text" th:field="*{CPF}">
+                    <label>CPF: <input class="form-control cpf" type="text" th:field="*{CPF}"></label>
                 </div>
                 <div class="form-floating">
-                    Login: <input class="form-control" type="text" th:field="*{usuario.login}">
+                    <label>Login: <input class="form-control" type="text" th:field="*{usuario.login}"></label>
                 </div>
                 <div class="form-floating">
-                    Senha: <input class="form-control" type="password" th:field="*{usuario.password}">
+                    <label>Senha: <input class="form-control" type="password" th:field="*{usuario.password}"></label>
                 </div>
                 <br>
                 <div class="alert alert-danger d-flex" role="alert" th:each="erro : ${#fields.detailedErrors()}">
                     <span th:text="${erro.message}"></span>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Cadastrar">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Cadastrar">
+                </div>
+                <p class="mt-5 mb-3 text-muted">&copy; 2021 Programação para WEB II - Jhonatan Santiago</p>
             </form>
-            <p class="mt-5 mb-3 text-muted">&copy; 2021 Programação para WEB II - Jhonatan Santiago</p>
+
         </main>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+            html,
+            body {
+                height: 100%;
+            }
+
             body {
                 font-family: 'Noto Sans', sans-serif;
-            }         
+                display: flex;
+                align-items: center;
+                padding-top: 40px;
+                padding-bottom: 40px;
+                background-color: #f5f5f5;
+            }
+
+            .form-signin {
+                width: 100%;
+                max-width: 330px;
+                padding: 15px;
+                margin: auto;
+            }        
         </style>
     </body>
 </html>

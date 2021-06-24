@@ -78,7 +78,7 @@ public class ControllerVenda {
     }
     
     @GetMapping("/saleslist")
-    public ModelAndView saleslist(Venda venda, ModelMap model) { //lista de vendasData
+    public ModelAndView saleslist(Venda venda, ModelMap model) { //lista de vendas
         model.addAttribute("vendas", vendarepository.vendas());
         return new ModelAndView("/vendas/saleslist", model);
     }
@@ -160,7 +160,7 @@ public class ControllerVenda {
     }
     
     @GetMapping("/mysales")
-    public ModelAndView mysales(Venda venda, ModelMap model) { //lista de vendasData
+    public ModelAndView mysales(Venda venda, ModelMap model) { //lista de vendas do cliente
         ClientePF clientePF = clienteLogado();
         model.addAttribute("vendas", vendarepository.clienteVendas(clientePF));
         return new ModelAndView("/clientes/mysales", model);

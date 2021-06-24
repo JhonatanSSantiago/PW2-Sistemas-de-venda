@@ -12,7 +12,16 @@ and open the template in the editor.
     </head>
     <body>
         <div th:insert="fragments/header :: modelheader"></div>
-        <div class="container">
+        <div class="container bg-light">
+            <hr>
+            <div class="bg-dark p-3 text-white inline-block">
+                <h3 class="text-center">Produtos</h3>
+                <form th:action="@{/produtos/buscarforname}" method="get">
+                    <input type="text" th:value="@{nome}" th:name="nome">
+                    <input class="btn btn-light btn-sm" type="submit" value="buscar">
+                    <a class="btn btn-light btn-sm" th:href="@{/produtos/list}" title="Limpar filtro">Limpar</a>
+                </form>
+            </div>  
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
@@ -32,8 +41,8 @@ and open the template in the editor.
                     <td><a role="button" class="btn btn-danger" onclick="return window.confirm('Tem certeza que deseja excluir este Produto?')"  th:href="@{/produtos/remove/{idProduto}(idProduto=${p.idProduto})}">Excluir</a> </td>
                 </tr>
             </table>
-            <a role="button" class="btn btn-secondary" th:href="@{/produtos/registration}">Voltar</a>
         </div>
+        <br>
         <div th:insert="fragments/footer :: modelfooter"></div>
 
         <style>

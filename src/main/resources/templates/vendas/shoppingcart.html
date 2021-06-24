@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Carrinho de Compras</title>
+        <title>Meu Carrinho de Compras</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div th:insert="fragments/header :: modelheader"></div>
-        <br>
-        <div class="container">            
-            <h3>Meu Carrinho</h3>
+
+        <div class="container bg-light">            
+            <hr>
+            <div class="bg-dark p-3 text-white">
+                <h3 class="text-center">Meu Carrinho</h3>
+            </div>
             <table class="table">
                 <thead class="table-dark">
                     <tr>
@@ -40,10 +43,10 @@
                 <input type="hidden" th:value="${cliente}" th:name="venda.cliente" >               
                 <label>Total Compra: R$ </label><strong th:text="${session.venda.TotalVenda()}"></strong>
                 <input role="button" class="btn btn-primary" type="submit" value="Finalizar Compra">
-            </form>
-                  
+            </form>                 
             <a role="button" class="btn btn-secondary" th:href="@{/vendas/catalog}">Adicionar mais itens</a>           
         </div>
+        <hr>
         <div th:insert="fragments/footer :: modelfooter"></div>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');

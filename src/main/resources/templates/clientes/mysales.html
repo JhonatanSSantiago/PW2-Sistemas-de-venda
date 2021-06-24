@@ -6,18 +6,22 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Minhas Vendas</title>
+        <title>Minhas Compras</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div th:insert="fragments/header :: modelheader"></div>
-        <div class="container">           
-            <form th:action="@{/vendas/buscarfordata}" method="get">
-                <input type="date" th:value="@{databusca}" th:name="databusca">
-                <input type="submit" value="buscar">
-            </form>
-            <br>
+        <div class="container bg-light">
+            <hr>
+            <div class="bg-dark p-3 text-white inline-block">
+                <h3 class="text-center">Minhas Compras</h3>
+                <form th:action="@{/vendas/buscarfordata}" method="get">
+                    <input type="date" th:value="@{databusca}" th:name="databusca">
+                    <input class="btn btn-light btn-sm" type="submit" value="buscar">
+                    <a class="btn btn-light btn-sm" th:href="@{/vendas/mysales}">Limpar</a>
+                </form>
+            </div>
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
@@ -38,8 +42,8 @@ and open the template in the editor.
                     <td><a role="button" class="btn btn-info" th:href="@{/vendas/details/{idVenda}(idVenda=${v.idVenda})}">DETALHES</a></td>
                 </tr>
             </table>
-            <a role="button" class="btn btn-secondary" th:href="@{/vendas/catalog}">Voltar</a>
         </div>
+        <br>
         <div th:insert="fragments/footer :: modelfooter"></div>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
@@ -47,5 +51,5 @@ and open the template in the editor.
                 font-family: 'Noto Sans', sans-serif;
             }         
         </style>
-</body>
+    </body>
 </html>
