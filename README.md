@@ -1,4 +1,4 @@
-#  Programação para Web 2 - Projeto Final - Sistemas de Vendas
+#  Programação p/ Web 2 - Sistemas de Vendas ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/JhonatanSSantiago/PW2-Sistemas-de-venda/sistem-vendas?style=flat-square)
 
 1) O projeto deve ser desenvolvido utilizando as tecnologias/recursos utilizadas em nossas aulas;
 
